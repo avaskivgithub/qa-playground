@@ -1,0 +1,25 @@
+ET1: As a Tester I want to be able to view and delete list of tests I've already executed
+ET2: As a Tester I want to be able to add tests to the list of the test results
+
+ET1/2-S1: Add api that writes / reads test results from table Results
+*** Api calls GET:
+***               /getall (return all records from Results table)
+***               /clear (drop Results table)
+***               /setup (create Results table)
+*** Api call POST:
+***               /add (insert record into the Results table)
+
+ET1/2-S2: Add web page to view / delete test results
+*** It should be home page http://127.0.0.1:5000/ with
+***               - grid (contains all test results)
+***               - 'Add Test' btn (redirects user to the next page where you can add test results)
+***               - 'Delete All Tests' btn (clear grid with test results)
+
+ET2-S3: Add web page to add test results
+*** It should be page http://127.0.0.1:5000/showAdd to which user is redirected from home page with:
+***               - fields that responds to each field from Results table (Id, Name, Description, Res, Error)
+***               - Add Test btn (test is added)
+***               - Cancel btn (no test is added)
+*** After clicking 'Add Test' or 'Cancel' btn user is redirected to the home page with list of already added test results)
+
+etc...

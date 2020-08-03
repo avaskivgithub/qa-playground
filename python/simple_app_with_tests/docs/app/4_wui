@@ -1,0 +1,9 @@
+
+You'll have to start test app with control.sh script:
+> cd <root dir of the simple_app_with_tests>
+> bash control.sh
+
+Now open WUI URL: http://127.0.0.1:5000/
+
+View WUI logs:
+> tail -f /tmp/web_gui.py.log

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Python Flask Test App</title>
+
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/tableres.css" rel="stylesheet">
+
+    <script src="../static/js/jquery-1.12.0.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $( "#allTestsTable tbody tr" ).on( "click", function( event ) {
+                if ($(this).find("td").eq(0).html()) {
+                    window.location.href = '/edit/' + $(this).find("td").eq(0).html();
+                }
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="/">Home</a>
+                    </li>
+                    <li role="presentation"><a href="showAdd">Add Test</a>
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Python Flask Test App</h3>
+        </div>
+
+        <div>
+            <h2>List of test results:</h2>
+        </div>
+        
+        <div class="row marketing">
+            <table id='allTestsTable' name='allTestsTable' style="width:100%">
+                <tr>
+                    <th>Test Id</th>
+                    <th>Test Name</th>		
+                    <th>Test Res</th>
+                    <th>Test Description</th>		
+                    <th>Fail / Error Desc</th>
+                </tr>
+                {% for row in result %}
+                    <tr>
+                    <td>{{ row['Id'] }}</td>
+                    <td>{{ row['Name'] }}</td>
+                    <td>{{ row['Res'] }}</td>
+                    <td>{{ row['Description'] }}</td>
+                    <td>{{ row['Error'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        
+        <div>
+            <p>
+            <a class="btn btn-lg btn-success" name='addTest' href="showAdd" role="button">Add Test</a>
+            <a class="btn btn-lg btn-success" name='deleteAllTests' href="reset" role="button">Delete All Tests</a>
+            </p>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; Company 2016</p>
+        </footer>
+
+    </div>
+</body>
+
+</html>

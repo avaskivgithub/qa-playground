@@ -1,0 +1,29 @@
+
+Api saves data to test.db with only one "Results" table with fields (Id, Name, Description, Res, Error):
+
+CREATE TABLE Results(Id TEXT,
+                     Name TEXT,
+                     Description BLOB,
+                     Res INT,
+                     Error BLOB);
+
+Res field is integer where values mean:
+-1 - Not Started
+ 1 - Passed
+ 0 - Failed
+any other value - Error
+
+e.g Open sqlite and select data from Results table
+
+> sqlite3 app/sqlite_dbs/test.db
+SQLite version 3.8.10.2 2015-05-20 18:17:19
+Enter ".help" for usage hints.
+sqlite> .mode column
+sqlite> .headers on
+sqlite> select * from Results;
+sqlite> insert into Results Values(1, "Name1", "Desc1", 1, "");
+sqlite> select * from Results;
+1|Name1|Desc1|1|
+sqlite> .exit
+
+

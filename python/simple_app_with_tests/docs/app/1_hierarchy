@@ -1,0 +1,26 @@
+
+simple_app_with_tests/
+       |
+       |_control.sh (*shell script to start / stop test application*)
+       |_docs/ (*info about test project*)
+           |
+           |_app/ (*short descriptions of db / api / wui*)
+           |_sprint1/ (*kind of planning for sprint #1*)
+           |_backlog (*list of epic stories for test project*)
+       |
+       |_project/
+               |
+               |_app/ (*test application*)
+                   |
+                   |_db.py (*get / save data into db*)
+                   |_api_server.py (*http server to call db.py methods*)
+                   |_api_client.py (*api for api_server.py methods*)
+                   |_web_gui.py (*web ui written using flask + api_client to get / save data into db*)
+               |
+               |_tests/ (*automated tests for application*)
+                    |
+                    |_clients/ (*interfaces / wrappers to work with app's db, rest api, selenium web driver*)
+                    |_tests/ (*tests itself*)
+                          |
+                          |_api (*tests for rest api*)
+                          |_wui (*tests for web ui*)

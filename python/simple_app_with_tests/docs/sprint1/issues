@@ -1,0 +1,51 @@
+Issue1: Web gui produces half-closed state sockets
+*******
+Load web ui:
+andriana@linux:~$ ab -n 500 -c 500 http://127.0.0.1:5000/
+This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+apr_pollset_poll: The timeout specified has expired (70007)
+Total of 403 requests completed
+
+Check connections once more:
+andriana@linux:~$ lsof -i :5000
+COMMAND  PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+python  6420 andriana    3u  IPv4 136411      0t0  TCP localhost:commplex-main (LISTEN)
+andriana@linux:~$ ls -l /proc/6420/fd
+total 0
+lr-x------ 1 andriana users 64 Apr  6 09:04 0 -> /dev/null
+l-wx------ 1 andriana users 64 Apr  6 09:04 1 -> /tmp/web_gui.py.log
+lr-x------ 1 andriana users 64 Apr  6 09:04 10 -> /dev/urandom
+lrwx------ 1 andriana users 64 Apr  6 09:13 11 -> socket:[190947]
+lrwx------ 1 andriana users 64 Apr  6 09:13 12 -> socket:[190949]
+l-wx------ 1 andriana users 64 Apr  6 09:04 2 -> /tmp/web_gui.py.log
+lrwx------ 1 andriana users 64 Apr  6 09:04 3 -> socket:[136411]
+lrwx------ 1 andriana users 64 Apr  6 09:13 34 -> socket:[191964]
+lrwx------ 1 andriana users 64 Apr  6 09:13 35 -> socket:[190877]
+lrwx------ 1 andriana users 64 Apr  6 09:13 36 -> socket:[190935]
+lrwx------ 1 andriana users 64 Apr  6 09:13 4 -> socket:[190937]
+lrwx------ 1 andriana users 64 Apr  6 09:13 5 -> socket:[190939]
+lrwx------ 1 andriana users 64 Apr  6 09:13 6 -> socket:[191927]
+lrwx------ 1 andriana users 64 Apr  6 09:13 7 -> socket:[190941]
+lrwx------ 1 andriana users 64 Apr  6 09:13 8 -> socket:[190943]
+lrwx------ 1 andriana users 64 Apr  6 09:13 9 -> socket:[190945]
+
+Web gui produces half-closed state sockets
+
+andriana@linux:~$ lsof -i :5000
+COMMAND  PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+python  6724 andriana    3u  IPv4 195409      0t0  TCP localhost:commplex-main (LISTEN)
+andriana@linux:~$ lsof | grep -w 6724 | grep -w sock
+python    6724        andriana    4u     sock                0,8       0t0     205365 can't identify protocol
+
+https://idea.popcount.org/2012-12-09-lsof-cant-identify-protocol/:
+Unfortunately, it looks like kernel removes all information about these sockets from /proc/net/*, lsof is not able to get any details about them and panics.
+
+*************************************************************************************

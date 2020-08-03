@@ -1,0 +1,84 @@
+This readme was created for Python 2, so some instructions can be obsolete.
+
+**********************
+OVERVIEW "Test App"
+**********************
+This small (more as a prototype) project called "Test App" is a playground for testing (to show what the process / tests can look like).
+
+"Test App" from business logic perspective is kind of a tool for handling test cases.
+It is implemented as an api with sqlite db in the backend and a web gui written using flask.
+
+See also ./docs/app for more details about hierarchy/db/api etc.
+
+**********************
+INSTALLATION "Test App"
+**********************
+Python and pip should be installed. For WINDOWS make sure that python's and pip's paths (C:\Python27\;C:\Python27\Scripts) are added to the system varable 'path'.
+For installation pip on windows you can use following script https://bootstrap.pypa.io/get-pip.py
+simple_app_with_tests>python get-pip.py
+
+Now Install test-playground and python packages:
+
+# ==== Sqlite db is our backend so install OR use docker image
+For LINUX:
+sudo zypper install sqlite3 sqlite3-devel # open suse
+sudo yum install sqlite3 sqlite3-devel # fedora
+sudo apt-get install sqlite3  sqlite3-devel # ubuntu
+
+For WINDOWS:
+install sqlite using next instructions: http://mislav.net/rails/install-sqlite3/
+> choco install sqlite
+
+
+# ==== gnuplot
+For Load.draw_elapsed_time_distribution() method from simple_app_with_tests/project/tests/clients/loadcl.py install:
+sudo zypper install gnuplot
+
+# ==== From root dir/project
+> sudo python setup.py develop
+
+********************************
+START / STOP "Test App" on LINUX
+********************************
+Start / Stop test application
+
+# ==== From root dir execute shell script to start api and wui:
+> cd <root dir of the simple_app_with_tests>
+> bash control.sh
+
+# ==== For stopping api and wui:
+> cd <root dir of the simple_app_with_tests>
+> bash control.sh stop
+
+# ==== To view web and api logs:
+> tail -F /tmp/web_gui.py.log /tmp/api_server.py.log
+
+**********************************
+START / STOP "Test App" on WINDOWS
+**********************************
+For now on Windows just open 2 command prompts and start wui / api, like this:
+C:\Users\Andriana\Documents\Projects\simple_app_with_tests\project\app>python api_server.py
+Tue Mar 01 22:40:57 2016 Server Starts - 127.0.0.1:12345
+
+C:\Users\Andriana\Documents\Projects\simple_app_with_tests\project\app>python web_gui.py
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+TOBD: Add to windows services (maybe I'll need bat script...):
+http://ss64.com/nt/
+http://ryrobes.com/python/running-python-scripts-as-a-windows-service/
+
+**************************
+WUI and API for "Test App"
+**************************
+
+# ==== Now you can go to browser and open wui:
+http://127.0.0.1:5000/
+
+Wui is sending requests to API: http://127.0.0.1:12345/
+Api saves data into sqlite db with only one "Results" table with fields (Id, Name, Description, Res, Error)
+
+**********************
+RUN tests for "Test App"
+**********************
+> cd <root dir of the simple_app_with_tests>
+> nosetests -v project/tests/tests/

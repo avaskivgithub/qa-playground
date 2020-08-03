@@ -1,0 +1,12 @@
+#!/usr/bin/gnuplot -persist
+
+set grid
+set title "Load requests=100 rate=10"
+set xlabel "Request No"
+set ylabel "Request elapse time"
+
+set terminal png size 2000,1500 enhanced font "Helvetica,20"
+set output "/home/avaskiv/Dropbox/test_python_sh/python/simple_app_with_tests/project/investigation/load_results.png"
+
+plot "/tmp/load_with_gevent.dat" using 1:2 title "Test Results" with lines
+    

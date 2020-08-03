@@ -1,0 +1,172 @@
+*******
+OPTIONS:
+*******
+#1. run_benchmark.sh compares treading, multiprocessing and gevent libs
+./different_python_concurrency_libs/run_benchmark.sh 
+
+gevent wins (see chart in the ./different_python_concurrency_libs/gnuplot_results_benchmark_output.png)
+
+#2. As alternative apache bench tool can be used:
+ab -n <num_requests> -c <concurrency> <addr>:<port><path>
+
+The ApacheBench tool (ab) can load test servers by sending an arbitrary number of concurrent requests. Although ab was designed for testing Apache installations, it can be used to benchmark any HTTP server.
+apt-get install apache2-utils
+https://www.digitalocean.com/community/tutorials/how-to-use-apachebench-to-do-load-testing-on-an-ubuntu-13-10-vps
+
+https://www.simonholywell.com/post/2015/06/parallel-benchmark-many-urls-with-apachebench/
+http://stackoverflow.com/questions/8833688/http-load-test-tool-for-variable-urls
+sudo apt-get install parallel
+cat URLs.txt
+http://example.org
+http://www.example.net
+http://tools.example.com
+http://secure.example.tk/my-passwords.html
+This can then easily be passed into parallel through the use of the cat utility.
+
+cat URLs.txt | parallel 'ab -c 10 -n 100 {}'
+
+#3. As alternative locust is really interesting:
+http://docs.locust.io/en/latest/quickstart.html
+https://github.com/locustio/locust
+
+*******
+SUM-UP:
+*******
+(option #1) I selected gevent lib. Having your own client makes easier to tune responses analysis
+(e.g what if you need to check not only returned status code but also some returned header or content of the body)
+See simple_app_with_tests/project/tests/clients/loadcl.py client created based on load_with_gevent.py
+
+(option #2) ApacheBench. Really cool tool to make basic load test,but you wouldn't be able to handle exceptions and
+extra response analysis (though i didn't spent enough time for investigation and maybe there are ways to do this).
+Anyway if you need to load application and you want to do this right away the ApacheBench will be my choice.
+
+(option #3) I liked locust. But again like with ApacheBench i want it to be more flexible in responses analysis.
+Still code is available so you can tune behavior by yourself. Besides locust code base is a great way to learn how
+the structure of the projects can be done and use of different patterns.
+
+(option #1 vs #2)
+It is appeared that only ApacheBench has real concurrency.
+simple_app_with_tests/project/tests/clients/data/draw_demo_ab_vs_gevent.png - shows that ab has real concurrency
+simple_app_with_tests/project/tests/clients/data/ab_vs_gevent - steps to gather timestamps in the current minute from running load via ab and gevent
+
+Here what was done (see for details simple_app_with_tests/project/tests/clients/data/ab_vs_gevent):
+
+1) Start grepping network raw data into /file_path_raw_data
+sudo ngrep -qt -W byline -d lo "GET /" "dst port 5000" &> /file_path_raw_data
+....
+
+T 2016/04/13 16:38:25.193042 127.0.0.1:49712 -> 127.0.0.1:5000 [AP]
+GET / HTTP/1.0.
+Host: 127.0.0.1:5000.
+User-Agent: ApacheBench/2.3.
+Accept: */*.
+.
+
+2) Run test using either ab or gevent:
+> ab -n 500 -c 500 http://127.0.0.1:5000/
+> nosetests simple_app_with_tests/project/tests/tests/wui/test_load_wui.py
+
+3) Then grep from /file_path_raw_data
+i=0; for ts in $(grep 2016 /file_path_raw_data | awk '{print $3}' | awk -F ':' '{print $3}' | tr '\n' ' '); do echo "$i $ts"; i=$((i + 1)); done > /tmp/rstno_to_timestamp
+/tmp/requestno_to_timestamp was like
+avaskiv@linux:~> head -n 2 /tmp/requestno_to_timestamp
+0 47.276532
+1 47.292694
+avaskiv@linux:~> tail -n 2 /tmp/requestno_to_timestamp
+498 57.232061
+499 57.252707
+
+4) Draw plot simple_app_with_tests/project/tests/clients/data/draw_demo_ab_vs_gevent.png  from data received on step #3
+(/tmp/requestno_to_timestamp: /tmp/ab, /tmp/ge files)
+
+*******
+LINKS:
+*******
+http://learn-gevent-socketio.readthedocs.org/en/latest/general_concepts.html
+http://learn-gevent-socketio.readthedocs.org/en/latest/gevent.html
+
+https://github.com/gevent/gevent/tree/master/examples
+
+http://www.tutorialspoint.com/python/python_multithreading.htm
+
+http://mauveweb.co.uk/posts/2014/07/gevent-asynchronous-io-made-easy.html
+
+http://blog.pythonisito.com/2012/07/gevent-threads-and-benchmarks.html
+http://blog.pythonisito.com/2012/07/introduction-to-gevent.html
+
+*******
+EXAMPLES of how to use different tools / libs:
+*******
+=========================================================================================================================
+#1
+python load_with_gevent.py
+
+As a result load_results.png will be generated
+=========================================================================================================================
+#2
+ab -n 200 -c 100 http://127.0.0.1:5000/
+
+/simple_app_with_tests/project/investigation> ab -n 200 -c 100 http://127.0.0.1:5000/
+This is ApacheBench, Version 2.3 <$Revision: 1663405 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Finished 200 requests
+
+
+Server Software:        Werkzeug/0.11.4
+Server Hostname:        127.0.0.1
+Server Port:            5000
+
+Document Path:          /
+Document Length:        2865 bytes
+
+Concurrency Level:      100
+Time taken for tests:   3.214 seconds
+Complete requests:      200
+Failed requests:        0
+Total transferred:      604200 bytes
+HTML transferred:       573000 bytes
+Requests per second:    62.22 [#/sec] (mean)
+Time per request:       1607.145 [ms] (mean)
+Time per request:       16.071 [ms] (mean, across all concurrent requests)
+Transfer rate:          183.57 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   2.2      3       6
+Processing:    16 1193 507.4   1521    1687
+Waiting:       15 1192 507.5   1520    1683
+Total:         22 1195 505.4   1524    1687
+
+Percentage of the requests served within a certain time (ms)
+  50%   1524
+  66%   1547
+  75%   1570
+  80%   1581
+  90%   1658
+  95%   1673
+  98%   1680
+  99%   1683
+ 100%   1687 (longest request)
+
+=========================================================================================================================
+#3
+simple_app_with_tests/project/investigation> locust -f load_with_locust.py -c 200 -r 100 --no-web
+[2016-03-28 15:08:32,936] linux.suse/INFO/locust.main: Starting Locust 0.7.3
+[2016-03-28 15:08:32,937] linux.suse/INFO/locust.runners: Hatching and swarming 200 clients at the rate 100 clients/s...
+ Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Total                                                              0     0(0.00%)                                       0.00
+
+ Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s
+--------------------------------------------------------------------------------------------------------------------------------------------
+ GET /                                                             42     0(0.00%)     261      61     485  |     230    0.00
+ GET /edit/1                                                       37     0(0.00%)     221      68     462  |     170    0.00
+ GET /edit/2                                                       30     0(0.00%)     291      50     472  |     290    0.00
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Total                                                            109     0(0.00%)  

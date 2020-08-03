@@ -1,0 +1,60 @@
+
+API URL: http://127.0.0.1:12345/
+API logs (if you started app with control.sh):
+> tail -f /tmp/api_server.py.log
+
+
+API has following calls:
+
+GET requests: /getall, /setup, /clear
+     |
+     |      where,
+     |
+     |      - /setup and /clear respectively creates and drops Results table
+     |
+     |      - /getrecord?id=<record_id>
+     |      curl http://127.0.0.1:12345/getrecord?id=1 | python -m json.tool
+     |                  {
+     |                      "Description": null,
+     |                      "Error": null,
+     |                      "Id": 1,
+     |                      "Name": "Test1",
+     |                      "Res": 1
+     |                   }
+     |
+     |      - /getall returns all records from Results table:
+     |      curl http://127.0.0.1:12345/getall | python -m json.tool
+     |                  {
+     |                      "Results": [
+     |                          {
+     |                              "Description": null,
+     |                              "Error": null,
+     |                              "Id": 1,
+     |                              "Name": "Test1",
+     |                              "Res": 1
+     |                          },
+     |                          {
+     |                              "Description": "Test steps: \n1. Step1",
+     |                              "Error": "Failed with unexpected result",
+     |                              "Id": 2,
+     |                              "Name": "Test2",
+     |                              "Res": 0
+     |                          }
+     |                      ]
+     |                  }
+
+POST request: /add
+     |
+     |      - /add inserts record into Results table:
+     |      e.g post data like:
+     |        {"Res": 1, "Description": null, "Error": null, "Id": 3, "Name": "Test3"}"
+     |
+     |      curl -d "{"Res": 1, "Description": null, "Error": null, "Id": 3, "Name": "Test3"}" http://127.0.0.1:12345/add
+
+
+PS:
+    Res field is integer where values mean:
+        -1 - Not Started
+         1 - Passed
+         0 - Failed
+        any other value - Error

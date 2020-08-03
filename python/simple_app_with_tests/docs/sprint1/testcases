@@ -1,0 +1,44 @@
+ET1/2-S1: Add api that writes / reads test results from table Results
+*** Api calls GET:
+***               /getall (return all records from Results table)
+***               /clear (drop Results table)
+***               /setup (create Results table)
+*** Api call POST:
+***               /add (insert record into the Results table)
+
+Check /getall when there are tests in the Results table
+Check /getall when Results table is empty
+Check /getall when Results table is dropped
+Check /getall when sqlite test.db was deleted
+
+Check /clear when there are tests in the Results table
+Check /clear when Results table is empty
+Check /clear when Results table is dropped
+Check /clear when sqlite test.db was deleted
+
+Check /setup when there are tests in the Results table
+Check /setup when Results table is empty
+Check /setup when Results table is dropped
+Check /setup when sqlite test.db was deleted
+
+Check /add with all fields populated ({"Id": "T1", "Name": "Test1", "Description": "Some test descr", "Res": 1, "Error": "Some string"}")
+Check /add when there is no one of the fields ("Id" / "Name" / "Description" / "Res" /"Error") 
+Check /add when one of the fields is null ("Id" / "Name" / "Description" / "Res" /"Error") 
+
+etc.
+
+
+ET1/2-S2: Add web page to view / delete test results
+*** It should be home page http://127.0.0.1:5000/ with
+***               - grid (contains all test results)
+***               - 'Add Test' btn (redirects user to the next page where you can add test results)
+***               - 'Delete All Tests' btn (clear grid with test results)
+
+ET2-S3: Add web page to add test results
+*** It should be page http://127.0.0.1:5000/showAdd to which user is redirected from home page with:
+***               - fields that responds to each field from Results table (Id, Name, Description, Res, Error)
+***               - Add Test btn (test is added)
+***               - Cancel btn (no test is added)
+*** After clicking 'Add Test' or 'Cancel' btn user is redirected to the home page with list of already added test results)
+
+etc...

@@ -1,0 +1,24 @@
+"Test App"'s actors: Tester, QA Manager, Administrator
+
+Epic Stories:
+
+*** Epic stories for a Tester
+ET1: As a Tester I want to be able to view and delete list of tests I've already executed
+ET2: As a Tester I want to be able to add tests to the list of the test results
+ET3: As a Tester I want to be able to update / delete tests from the list of the test results
+
+ET4: As a Tester I want to be able to create / update / delete tests' templates
+ET5: As a Tester I want to be able to load tests' templates to the list of the test results
+
+*** Epic stories for a Test Manager
+EM1: As a QA Manager I want to be able to prioritize tests from tests' templates
+
+EM2: As a QA Manager I want to be able to create projects and link tests' templates to created projects
+EM3: As a QA Manager I want to be able to create projects and link tests' results to created projects
+EM4: As a QA Manager I want to be able to update / delete projects
+EM5: As a QA Manager I want to be able to select projects and view tests' templates linked to selected project
+EM6: As a QA Manager I want to be able to select projects and view tests' results linked to selected project
+
+*** Epic stories for an Administrator who will setup application
+EA1: As an Administrator I want to have deb and rpm packages
+EA2: As an Administrator I want to add reverse proxy for web gui

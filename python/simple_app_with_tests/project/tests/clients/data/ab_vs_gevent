@@ -1,0 +1,43 @@
+ab has real concurrency (see draw_demo_ab_vs_gevent.png)
+
+avaskiv@linux:~> sudo ngrep -qt -W byline -d lo "GET /" "dst port 5000" &> /home/avaskiv/Documents/USA_sabatical/Python_Cookbook_by_Beazly_and_Jones/data/ngrep_ab_500_500
+> ab -n 500 -c 500 http://127.0.0.1:5000/
+avaskiv@linux:~> grep 2016 /home/avaskiv/Documents/USA_sabatical/Python_Cookbook_by_Beazly_and_Jones/data/ngrep_ab_500_500 | awk '{print $3}' | awk -F '.' '{print $1}' | uniq -c
+    165 15:58:26
+     75 15:58:27
+     69 15:58:28
+     77 15:58:29
+     72 15:58:30
+     73 15:58:31
+      4 15:58:32
+      1 15:58:33
+
+avaskiv@linux:~> sudo ngrep -qt -W byline -d lo "GET /" "dst port 5000" &> /home/avaskiv/Documents/USA_sabatical/Python_Cookbook_by_Beazly_and_Jones/data/ngrep_gevent_500_500
+> nosetests simple_app_with_tests/project/tests/tests/wui/test_load_wui.py
+avaskiv@linux:~> grep 2016 /home/avaskiv/Documents/USA_sabatical/Python_Cookbook_by_Beazly_and_Jones/data/ngrep_gevent_500_500 | awk '{print $3}' | awk -F '.' '{print $1}' | uniq -c
+     54 16:04:01
+     54 16:04:02
+     54 16:04:03
+     52 16:04:04
+     50 16:04:05
+     49 16:04:06
+     50 16:04:07
+     48 16:04:08
+     48 16:04:09
+     41 16:04:10
+
+avaskiv@linux:~> i=0; for ts in $(grep 2016 /home/avaskiv/Documents/USA_sabatical/Python_Cookbook_by_Beazly_and_Jones/data/ngrep_gevent_500_500_b | awk '{print $3}' | awk -F ':' '{print $3}' | tr '\n' ' '); do echo "$i $ts"; i=$((i + 1)); done > /tmp/ge
+avaskiv@linux:~> i=0; for ts in $(grep 2016 /home/avaskiv/Documents/USA_sabatical/Python_Cookbook_by_Beazly_and_Jones/data/ngrep_ab_500_500_b | awk '{print $3}' | awk -F ':' '{print $3}' | tr '\n' ' '); do echo "$i $ts"; i=$((i + 1)); done > /tmp/ab
+
+
+# Draw chart draw_demo_ab_vs_gevent.png
+from draw_gnuplot import draw_gnuplot_chart
+if __name__ == '__main__':
+
+    files_paths = ['/tmp/ab', '/tmp/ge']
+    draw_gnuplot_chart(data_files_paths=files_paths, result_dir=curent_dir,
+                       output_file='data/draw_demo_ab_vs_gevent.png',
+                       title='Apache Benchmark (ab) vs gevent (ge)',
+                       xlable='Request Time Send (secs:millisecs in current hour)',
+                       ylable='Request No',
+                       if_rm_data_file=False)
