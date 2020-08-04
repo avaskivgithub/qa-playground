@@ -7,7 +7,7 @@ A playground for playing around with testing using a "Test App".
 * UI (if created) that uses api to add / edit / delete tests
 
 ## Purpose
-Test App" is a playground for testing (to show what the process / tests can look like). This app can be used to:
+"Test App" is a playground for testing (to show what the process / tests can look like). This app can be used to:
 * add new features (this way you'll try a programming language)
 * add automated tests (note that those tests are not unit tests, but more of the system tests that perform black box testing)
 * create test design / user stories / describe issues
