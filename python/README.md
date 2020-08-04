@@ -1,5 +1,5 @@
 # simple_app_with_tests
-"Test App" written in Python and with [system tests](http://softwaretestingfundamentals.com/system-testing/#:~:text=SYSTEM%20TESTING%20is%20a%20level,compliance%20with%20the%20specified%20requirements.)
+"Test App" written in Python and with system tests [see the definition here](http://softwaretestingfundamentals.com/system-testing/#:~:text=SYSTEM%20TESTING%20is%20a%20level,compliance%20with%20the%20specified%20requirements.)
 
 ## Prerequisites 
 You'll need:
@@ -10,7 +10,7 @@ You'll need:
 ```
 * Python 3. Originally "Test App" was created with Python 2 [see "READMEoriginal" for details](simple_app_with_tests/READMEoriginal).
 ```
-# on Windows it was test with
+# on Windows it was tested with
 > python --version
 Python 3.7.0
 ```
@@ -85,7 +85,7 @@ OK
 ```
 
 # Tasks
-Possible questions for interview questions:
+Possible questions for a newcomer:
 * Look for "Test App" issues
 * Create a test design for "Test App" 
 * What risks do you see in the sugested design of the "Test App"
