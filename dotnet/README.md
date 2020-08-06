@@ -44,4 +44,25 @@ qa-playground\dotnet\TestApp> dotnet run
 
 # get: https://localhost:5001/results
 ```
+* Reorganized by moving RestApi project into it's own subfolder
+```
+qa-playground\dotnet> dotnet sln TestApp remove TestApp/RestApi.csproj
+
+# from Git Bash
+andri@LAPTOP-2K696J8H MINGW64 ~/Documents/Projects/2020/qa-playground/dotnet/TestApp
+$ for file in $(ls | grep -v 'RestApi' | grep -v 'TestApp.sln'); do git mv $file RestApi; done;
+
+# back from Visual Studio Code
+qa-playground\dotnet\TestApp> rm -r bin
+qa-playground\dotnet\TestApp> rm -r obj
+qa-playground\dotnet\TestApp> git mv .\RestApi.csproj .\RestApi\
+qa-playground\dotnet\TestApp> dotnet sln add .\RestApi\RestApi.csproj
+
+# check that we are ok
+qa-playground\dotnet\TestApp> dotnet build .\RestApi\RestApi.csproj
+qa-playground\dotnet\TestApp> cd .\RestApi\
+qa-playground\dotnet\TestApp\RestApi> dotnet run
+
+# get: https://localhost:5001/results
+```
 * TBD: Link RestApi.Data.IResultsRepository with RestApi.Controllers.ResultsController
