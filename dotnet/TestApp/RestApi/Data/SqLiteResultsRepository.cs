@@ -56,10 +56,10 @@ namespace RestApi.Data
                     @"CREATE TABLE Results
                         (
                             Id integer primary key AUTOINCREMENT,
-                            Name TEXT,
-                            Description BLOB,
+                            Name varchar(50),
+                            Description varchar(1024),
                             Res INT,
-                            Error BLOB
+                            Error varchar(256)
                         )");
             }
         }
@@ -86,10 +86,11 @@ namespace RestApi.Data
             using (var cnn = SimpleDbConnection())
             {
                 cnn.Open();
-                var results = cnn.Query(
-                    @"SELECT Id, Name, Description, Res, Error
-                    FROM Results;");
-                return (IEnumerable<Result>)results;
+                using (var multi = cnn.QueryMultiple(@"SELECT Id, Name, Description, Res, Error FROM Results;"))
+                {
+                    var results = multi.Read<Result>().ToList();
+                    return (IEnumerable<Result>)results;
+                }  
             }
         }
     }
