@@ -62,7 +62,7 @@ qa-playground\dotnet\TestApp\RestApi> dotnet run
 
 # get: https://localhost:5001/results
 ```
-* Updated ResultsController with 3 endpoints, where one of them for seeding data. So, after calling https://localhost:5001/create/db/seeddata  data did get into the db:
+* Updated ResultsController with 3 endpoints ( /results, /results/{id}, /create/db/seeddata) which uses RestApi.Data.IResultsRepository.After calling https://localhost:5001/create/db/seeddata  data were seeded into the db:
 ```
 qa-playground\dotnet\TestApp\RestApi> sqlite3 .\sqlitetest.db
 SQLite version 3.32.3 2020-06-18 14:00:33
@@ -73,8 +73,17 @@ sqlite> select * from Results;
 3|Name3|Description3|1|Error3
 sqlite> .exit
 ```
+* xunit tests for RestApi. [Getting started doc](https://xunit.net/docs/getting-started/netcore/cmdline)
+```
+qa-playground\dotnet\TestApp> dotnet new xunit -n SystemTestsRestApi -o SystemTestsRestApi
+qa-playground\dotnet\TestApp> cd ..
+qa-playground\dotnet> dotnet sln TestApp add .\TestApp\SystemTestsRestApi\SystemTestsRestApi.csproj
+qa-playground\dotnet> cd .\TestApp\SystemTestsRestApi\
+qa-playground\dotnet\TestApp\SystemTestsRestApi> dotnet test
+
+```
 
 ## TBD
-* Link RestApi.Data.IResultsRepository with RestApi.Controllers.ResultsController
 * Add system tests using xunit for /results and /results/{resultId} endpoints
+* Add authentication to the api
 * Add docstrings using [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments)
