@@ -80,7 +80,11 @@ qa-playground\dotnet\TestApp> cd ..
 qa-playground\dotnet> dotnet sln TestApp add .\TestApp\SystemTestsRestApi\SystemTestsRestApi.csproj
 qa-playground\dotnet> cd .\TestApp\SystemTestsRestApi\
 qa-playground\dotnet\TestApp\SystemTestsRestApi> dotnet test
-
+```
+* To match python version added SystemTestsRestApi.Clients, which are test services (helpers) to setup / call db and rest api
+```
+# for HttpTestClient https://stackoverflow.com/questions/19158378/httpclient-not-supporting-postasjsonasync-method-c-sharp
+dotnet add package Microsoft.AspNet.WebApi.Client --version 5.2.7
 ```
 
 ## TBD
