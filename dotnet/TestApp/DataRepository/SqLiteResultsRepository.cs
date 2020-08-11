@@ -2,9 +2,9 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Dapper;
-using RestApi.Models;
+using Models;
 
-namespace RestApi.Data
+namespace DataRepository
 {
     public class SqLiteResultsRepository : SqLiteBaseRepository, IResultsRepository
     {

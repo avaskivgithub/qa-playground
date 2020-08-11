@@ -1,6 +1,6 @@
 using System;
 
-namespace RestApi.Models
+namespace Models
 {
     public class Result
     {

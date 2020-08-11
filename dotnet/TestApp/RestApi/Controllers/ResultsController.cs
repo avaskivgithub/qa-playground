@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RestApi.Models;
-using RestApi.Data;
+using Models;
+using DataRepository;
 
 namespace RestApi.Controllers
 {

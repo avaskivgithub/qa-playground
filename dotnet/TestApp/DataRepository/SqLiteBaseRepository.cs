@@ -1,7 +1,7 @@
 using System;
 using System.Data.SQLite;
 
-namespace RestApi.Data
+namespace DataRepository
 {
     public class SqLiteBaseRepository
     {

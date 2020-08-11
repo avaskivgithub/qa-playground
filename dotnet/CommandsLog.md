@@ -86,6 +86,14 @@ qa-playground\dotnet\TestApp\SystemTestsRestApi> dotnet test
 # for HttpTestClient https://stackoverflow.com/questions/19158378/httpclient-not-supporting-postasjsonasync-method-c-sharp
 dotnet add package Microsoft.AspNet.WebApi.Client --version 5.2.7
 ```
+* Moved Data into a separate project and the same for Models
+```
+qa-playground\dotnet\TestApp> dotnet new classlib -n DataRepository -o DataRepository
+qa-playground\dotnet\TestApp> dotnet add .\RestApi\RestApi.csproj reference .\DataRepository\DataRepository.csproj
+# for the access to Models
+qa-playground\dotnet\TestApp> dotnet add .\RestApi\RestApi.csproj reference .\Models\Models.csproj
+qa-playground\dotnet\TestApp> dotnet add .\DataRepository\DataRepository.csproj reference .\Models\Models.csproj
+```
 
 ## TBD
 * Add system tests using xunit for /results and /results/{resultId} endpoints

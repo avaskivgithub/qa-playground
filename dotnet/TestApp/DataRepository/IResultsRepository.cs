@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using RestApi.Models;
+using Models;
 
-namespace RestApi.Data
+
+namespace DataRepository
 {
     public interface IResultsRepository
     {
