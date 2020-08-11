@@ -94,6 +94,10 @@ qa-playground\dotnet\TestApp> dotnet add .\RestApi\RestApi.csproj reference .\Da
 qa-playground\dotnet\TestApp> dotnet add .\RestApi\RestApi.csproj reference .\Models\Models.csproj
 qa-playground\dotnet\TestApp> dotnet add .\DataRepository\DataRepository.csproj reference .\Models\Models.csproj
 ```
+* Used Data in test project and filled in setup step of the recreatig empty db in the init test
+```
+qa-playground\dotnet\TestApp> dotnet add .\SystemTestsRestApi\SystemTestsRestApi.csproj reference .\DataRepository\DataRepository.csproj
+```
 
 ## TBD
 * Add system tests using xunit for /results and /results/{resultId} endpoints

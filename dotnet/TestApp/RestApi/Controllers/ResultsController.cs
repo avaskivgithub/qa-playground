@@ -34,8 +34,8 @@ namespace RestApi.Controllers
         [HttpGet]
         public IEnumerable<Result> Get()
         {
-            return GenerateTestData();
-            // return _repository.GetResults();
+            // return GenerateTestData();
+            return _repository.GetResults();
         }
 
         [HttpGet]

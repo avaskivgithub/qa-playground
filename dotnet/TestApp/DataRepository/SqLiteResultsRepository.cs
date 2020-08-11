@@ -47,7 +47,7 @@ namespace DataRepository
             }
         }
 
-        private static void CreateDatabase()
+        public static void CreateDatabase()
         {
             using (var cnn = SimpleDbConnection())
             {
@@ -61,6 +61,14 @@ namespace DataRepository
                             Res INT,
                             Error varchar(256)
                         )");
+            }
+        }
+
+        public static void DeleteDatabase()
+        {
+            if (File.Exists(DbFile))
+            {
+                File.Delete(DbFile);
             }
         }
 
