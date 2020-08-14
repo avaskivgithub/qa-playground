@@ -103,3 +103,11 @@ qa-playground\dotnet\TestApp> dotnet add .\SystemTestsRestApi\SystemTestsRestApi
 * Add system tests using xunit for /results and /results/{resultId} endpoints
 * Add authentication to the api
 * Add docstrings using [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments)
+* Add logging
+```
+// nugets to check
+Microsoft.Extensions.Hosting
+Serilog.Extensions.Hosting
+Serilog.Settings.Configuration
+Serilog.Sinks.Console
+```
