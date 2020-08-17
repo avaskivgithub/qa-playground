@@ -34,7 +34,7 @@ namespace SystemTestsRestApi
             IEnumerable<Result> results = await _httpTestClient.GetResults();
 
             // 3. Check that response is 200 and empty response body
-            Assert.Equal(0, results.Count());
+            Assert.Empty(results);
         }
 
         [Fact]
@@ -59,11 +59,13 @@ namespace SystemTestsRestApi
             IEnumerable<Result> results = await _httpTestClient.GetResults();
 
             // 3. Check that response is 200 and empty response body
-            Assert.Equal(testData.Count(), results.Count());
+            Assert.True(testData.Count() == results.Count());
             for(int i=0; i < testData.Count(); i++)
             {
                 // TBD: https://stackoverflow.com/questions/10454519/best-way-to-compare-two-complex-objects
                 // Assert.True(testData.ElementAt(i).Equals(results.ElementAt(i)));
+                Assert.True(testData.ElementAt(i).Id == results.ElementAt(i).Id, 
+                            $"Expected: {testData.ElementAt(i).Id} != Actual: {results.ElementAt(i).Id}");
             }
         }
     }

@@ -98,9 +98,26 @@ qa-playground\dotnet\TestApp> dotnet add .\DataRepository\DataRepository.csproj 
 ```
 qa-playground\dotnet\TestApp> dotnet add .\SystemTestsRestApi\SystemTestsRestApi.csproj reference .\DataRepository\DataRepository.csproj
 ```
+* Added system tests using xunit for /results and /results/{resultId} endpoints
+```
+qa-playground\dotnet\TestApp\SystemTestsRestApi> dotnet test
+qa-playground\dotnet\TestApp\SystemTestsRestApi> dotnet test
+Test run for C:\Users\andri\Documents\Projects\2020\qa-playground\dotnet\TestApp\SystemTestsRestApi\bin\Debug\netcoreapp3.1\SystemTestsRestApi.dll(.NETCoreApp,Version=v3.1)
+Microsoft (R) Test Execution Command Line Tool Version 16.6.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+
+A total of 1 test files matched the specified pattern.
+
+Test Run Successful.
+Total tests: 2
+     Passed: 2
+ Total time: 1.7103 Seconds
+```
 
 ## TBD
-* Add system tests using xunit for /results and /results/{resultId} endpoints
+* Add UI using /results and /results/{resultId} endpoints (for now only table with results and view details for 1 result)
 * Add authentication to the api
 * Add docstrings using [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments)
 * Add logging
