@@ -115,6 +115,20 @@ Total tests: 2
      Passed: 2
  Total time: 1.7103 Seconds
 ```
+* Add UI mvc. A bit confusing, so have to go through [training](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-3.1&tabs=visual-studio-code) cearfly
+```
+qa-playground\dotnet\TestApp> dotnet new mvc -n UImvc -o UImvc
+qa-playground\dotnet> dotnet sln TestApp add .\TestApp\UImvc\UImvc.csproj
+
+# changed port from 5000s to 6000s
+qa-playground\dotnet> Select-String -Pattern 'applicationUrl' -CaseSensitive -SimpleMatch .\TestApp\UImvc\Properties\launchSettings.json
+TestApp\UImvc\Properties\launchSettings.json:6:      "applicationUrl": "http://localhost:47628",
+TestApp\UImvc\Properties\launchSettings.json:21:      "applicationUrl": "https://localhost:6001;http://localhost:6000",
+```
+* Added to the vc template project Results controller / view / model, but need to figure out foreach in the results view razor page
+```
+# added Results to the navbar-nav in the UImvc/Views/Shared/_Layout.cshtml to have Results tab
+```
 
 ## TBD
 * Add UI using /results and /results/{resultId} endpoints (for now only table with results and view details for 1 result)
