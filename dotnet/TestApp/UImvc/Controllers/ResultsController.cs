@@ -20,7 +20,12 @@ namespace UImvc.Controllers
 
         public IActionResult Index()
         {
-            return View(new ResultsViewModel{Id = 1, Name = "View Name from ResultsController", Res = 1});
+            List<ResultsViewModel> results = new List<ResultsViewModel>
+            {
+                new ResultsViewModel{Id = 1, Name = "View Name from ResultsController", Res = 1},
+                new ResultsViewModel{Id = 2, Name = "View Name from ResultsController 2", Res = 2}
+            };      
+            return View(results);
         }
     }
 }

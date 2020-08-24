@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<UImvc.Models.ResultsViewModel>
 @{
     ViewData["Title"] = "Admin Index";
 }
@@ -14,13 +14,16 @@
         </tr>
     </thead>
     <tbody>
+        @foreach (var Result in Model)
+        {
             <tr>
-                <td>Result.Id</td>
-                <td>Result.Name</td>
+                <td>@Result.Id</td>
+                <td>@Result.Name</td>
                 <td>
-                    Here will be on click edit
+                    Here will be onclick actions
                 </td>
             </tr>
+        }
     </tbody>
 </table>
 

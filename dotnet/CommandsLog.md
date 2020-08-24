@@ -171,6 +171,10 @@ dotnet run
 # go to https://localhost:6001/Result
 ```
 * NEXT: remove ef and figure out why results model was not working. Instead of db use rest api
+```
+# @foreach referes to the set of data as Model and model itself is defined by 
+# @model IEnumerable<UImvc.Models.ResultsViewModel>
+```
 
 ## TBD
 * Add UI using /results and /results/{resultId} endpoints (for now only table with results and view details for 1 result)
