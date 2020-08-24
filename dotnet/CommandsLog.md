@@ -129,6 +129,48 @@ TestApp\UImvc\Properties\launchSettings.json:21:      "applicationUrl": "https:/
 ```
 # added Results to the navbar-nav in the UImvc/Views/Shared/_Layout.cshtml to have Results tab
 ```
+* Trying scaffolding
+```
+dotnet tool install --global dotnet-aspnet-codegenerator
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+# unfortunatelly i had to install ef to make dotnet-aspnet-codegenerator not to fail
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.SQLite
+
+# Added Data\MvcResultContext.cs
+
+# Startup.cs
+using UImvc.Data;
+using Microsoft.EntityFrameworkCore;
+...
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllersWithViews();
+    
+    services.AddDbContext<MvcMovieContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
+}
+
+# appsettings*.json
+  "ConnectionStrings": {
+    "MvcResultContext": "Data Source=MvcResult.db"
+  }
+
+
+dotnet aspnet-codegenerator controller -name ResultController -m Result -dc MvcResultContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+
+# create db
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+# start app
+dotnet run
+
+# go to https://localhost:6001/Result
+```
+* NEXT: remove ef and figure out why results model was not working. Instead of db use rest api
 
 ## TBD
 * Add UI using /results and /results/{resultId} endpoints (for now only table with results and view details for 1 result)
