@@ -27,5 +27,27 @@ namespace UImvc.Controllers
             };      
             return View(results);
         }
+
+        // GET: Result/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Result result = new Result
+            {
+                Id = 0, 
+                Name = "Name: Replace me with call from api", Description="Desc: Replace me with call from api", 
+                Error = null, Res = 1
+            };
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return View(result);
+        }
     }
 }
