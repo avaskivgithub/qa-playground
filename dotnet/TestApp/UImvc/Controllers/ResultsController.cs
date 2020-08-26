@@ -6,20 +6,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UImvc.Models;
+using UImvc.Services;
+using System.Net.Http;
 
 namespace UImvc.Controllers
 {
     public class ResultsController : Controller
     {
         private readonly ILogger<ResultsController> _logger;
+        private readonly ResultService _resultService;
+        private readonly HttpClient _httpClient;
 
         public ResultsController(ILogger<ResultsController> logger)
         {
             _logger = logger;
+
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = new Uri("https://localhost:5001/");
+            _resultService = new ResultService(_httpClient);
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            // TBD: Result model need fix (with list there is an issue)
+            // List<Result> resultsAll = await _resultService.GetResults();
             List<ResultsViewModel> results = new List<ResultsViewModel>
             {
                 new ResultsViewModel{Id = 1, Name = "View Name from ResultsController", Res = 1},
@@ -36,12 +46,7 @@ namespace UImvc.Controllers
                 return NotFound();
             }
 
-            Result result = new Result
-            {
-                Id = 0, 
-                Name = "Name: Replace me with call from api", Description="Desc: Replace me with call from api", 
-                Error = null, Res = 1
-            };
+            Result result = await _resultService.GetResultById((int)id);
             if (result == null)
             {
                 return NotFound();
