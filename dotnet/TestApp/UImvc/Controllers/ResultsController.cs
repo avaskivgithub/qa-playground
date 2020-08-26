@@ -28,13 +28,25 @@ namespace UImvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // TBD: Result model need fix (with list there is an issue)
-            // List<Result> resultsAll = await _resultService.GetResults();
+            var resultsAll = await _resultService.GetResults();
+
+            /*
             List<ResultsViewModel> results = new List<ResultsViewModel>
             {
                 new ResultsViewModel{Id = 1, Name = "View Name from ResultsController", Res = 1},
                 new ResultsViewModel{Id = 2, Name = "View Name from ResultsController 2", Res = 2}
-            };      
+            };
+            */
+            List<ResultsViewModel> results = new List<ResultsViewModel>();
+            foreach(Result item in resultsAll)
+            {
+                results.Add(new ResultsViewModel
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Res = item.Res
+                });
+            }
             return View(results);
         }
 
