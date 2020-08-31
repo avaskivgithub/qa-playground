@@ -66,5 +66,19 @@ namespace UImvc.Controllers
 
             return View(result);
         }
+
+        // GET: Result/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Result/Create
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Res,Error")] Result result)
+        {
+            await _resultService.CreateResult(result);
+            return View(result);
+        }
     }
 }

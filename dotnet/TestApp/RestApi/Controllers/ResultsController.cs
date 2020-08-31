@@ -46,6 +46,12 @@ namespace RestApi.Controllers
             return _repository.GetResult(resultId);
         }
 
+        [HttpPost]
+        public void Create(Result result)
+        {
+            _repository.SaveResult(result);
+        }
+
         private IEnumerable<Result> GenerateTestData(int amount=5)
         {
             var rng = new Random();

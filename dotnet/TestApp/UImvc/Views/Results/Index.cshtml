@@ -5,6 +5,10 @@
 
 <h1>Results Administration</h1>
 
+<p>
+    <a asp-action="Create">Add Result</a>
+</p>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -27,4 +31,5 @@
     </tbody>
 </table>
 
+<!-- input type="button" value="Add Result" onclick="window.location.href='<%= Url.Action("Create", "Create") %>';" / -->
 <span id="spanError" class="text-danger"></span><br />
