@@ -175,9 +175,9 @@ dotnet run
 # @foreach referes to the set of data as Model and model itself is defined by 
 # @model IEnumerable<UImvc.Models.ResultsViewModel>
 ```
+* Added Details and Add Result to UI
 
 ## TBD
-* Add UI using /results and /results/{resultId} endpoints (for now only table with results and view details for 1 result)
 * Add authentication to the api
 * Add docstrings using [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments)
 * Add logging
