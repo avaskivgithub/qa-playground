@@ -89,7 +89,10 @@ namespace DataRepository
 
         public IEnumerable<Result> GetResults()
         {
-            if (!File.Exists(DbFile)) return null;
+             if (!File.Exists(DbFile))
+            {
+                CreateDatabase();
+            }
 
             using (var cnn = SimpleDbConnection())
             {
