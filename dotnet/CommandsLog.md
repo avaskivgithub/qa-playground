@@ -176,8 +176,45 @@ dotnet run
 # @model IEnumerable<UImvc.Models.ResultsViewModel>
 ```
 * Added Details and Add Result to UI
+* Adde docker file for RestApi proj, built image and started container
+```
+qa-playground\dotnet\TestApp> docker build -t avaskiv/restapi .
+qa-playground\dotnet\TestApp> docker run -p 5003:5001 avaskiv/restapi
+
+# but there is a network issue
+> Get-NetTCPConnection | Where-Object {$_.LocalPort -eq 5003}
+
+LocalAddress                        LocalPort RemoteAddress                       RemotePort State       AppliedSetting OwningProcess
+------------                        --------- -------------                       ---------- -----       -------------- -------------
+::1                                 5003      ::                                  0          Listen                     16036
+::                                  5003      ::                                  0          Listen                     13780
+
+> Invoke-WebRequest 'https://localhost:5003/results'
+Invoke-WebRequest : The underlying connection was closed: An unexpected error occurred on a send.
+At line:1 char:1
++ Invoke-WebRequest 'https://localhost:5003/results'
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-WebRequest], WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+
+> (Invoke-WebRequest 'https://localhost:5001/results').Content | convertfrom-json | convertto-json -depth 100
+{
+    "value":  [
+                  {
+                      "id":  1,
+                      "name":  "11 n",
+                      "description":  "desc 6",
+                      "res":  1,
+                      "error":  "error 6 it was manuall"
+                  },
+.....
+              ],
+    "Count":  2
+}
+```
 
 ## TBD
+* Why does RestApi is not accessible within a docker container?
 * Add authentication to the api
 * Add docstrings using [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments)
 * Add logging
