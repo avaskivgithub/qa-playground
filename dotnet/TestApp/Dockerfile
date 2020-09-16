@@ -10,7 +10,10 @@ RUN dotnet restore .\\RestApi\\RestApi.csproj &&  dotnet publish -c Release -o .
 # Generate runtime image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app/RestApi
-EXPOSE 5001
+# do i need 443?
+EXPOSE 443 5001
 # Copy compiled dlls from sdk image to runtime image
 COPY --from=build-env /app/RestApi/out .
+# Copy pfx cert for kestrel server
+COPY --from=build-env /app/RestApi/aspnetapp.pfx .
 ENTRYPOINT ["dotnet", "RestApi.dll"]
