@@ -59,7 +59,7 @@ namespace SystemTestsRestApi
             IEnumerable<Result> results = await _httpTestClient.GetResults();
 
             // 3. Check that response is 200 and empty response body
-            Assert.True(testData.Count() == results.Count());
+            Assert.True(testData.Count() == results.Count(), $"Expected amount {testData.Count()} != actual {results.Count()}");
             for(int i=0; i < testData.Count(); i++)
             {
                 // TBD: https://stackoverflow.com/questions/10454519/best-way-to-compare-two-complex-objects

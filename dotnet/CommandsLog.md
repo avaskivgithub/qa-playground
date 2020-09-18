@@ -357,7 +357,6 @@ root@89df291d8451:/app/RestApi# curl -k 'https://localhost:5001/results'
 ```
 
 ## TBD
-* Why does RestApi is not accessible within a docker container?
 * Add authentication to the api
 * Add docstrings using [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/documentation-comments)
 * Add logging
