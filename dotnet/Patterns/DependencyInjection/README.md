@@ -1,12 +1,9 @@
-# Abstract Factory
-It is a creational pattern.
+# Dependency Injection
+See for details:
+- https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection
+- https://docs.microsoft.com/en-us/aspnet/core/fundamentals/?view=aspnetcore-3.1&tabs=windows#dependency-injection-services
+- https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1
+- https://en.wikipedia.org/wiki/Dependency_injection
 
-
-This project is an app that emulates a drinks vending machine, which:
-- allows to make either a coffee or a tea from ingredients: water, instant or ground coffee, tea, sugar, milk
-- customizations are with or without: sugar, milk, flavours
-
-
-Based on the following example / materials:
-- https://codeburst.io/design-patterns-learning-abstract-factory-method-through-real-life-examples-9d0cc99ef0e8
-- https://www.dofactory.com/net/abstract-factory-design-pattern
+App itself is from Tim Corey's vide:
+- https://www.youtube.com/watch?v=GAOCe-2nXqc&feature=youtu.be
