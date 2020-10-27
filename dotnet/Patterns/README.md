@@ -6,6 +6,10 @@ A playground for trying design patterns using:
 
 To be comfortable with UML diagrams use this article https://www.codingame.com/playgrounds/503/design-patterns/uml-basics
 
+## Test App
+Each pattern example has **'Test App'** with the description of what the app does
 
-## TBD
-It would be cool to apply patterns to system tests.
+## Test Task
+For **'Test App'**:
+- Provide a test design and list of issues you ran into.
+- Add unit / integration / system tests.

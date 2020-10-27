@@ -7,3 +7,6 @@ See for details:
 
 App itself is from Tim Corey's vide:
 - https://www.youtube.com/watch?v=GAOCe-2nXqc&feature=youtu.be
+
+## Test App
+This project is an app that prints out Greeting message the amount of time defined by the _'LoopTimes'_ from the [appsettings.json](appsettings.json)
