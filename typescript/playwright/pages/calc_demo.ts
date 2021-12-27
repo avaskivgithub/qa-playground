@@ -12,14 +12,6 @@ export class CalcDemo {
       this.button_add = 'text=Add';
       this.result = 'input[name="result"]'
     }
-   
-    get_selector_field_1() {
-      return this.field_1
-    }
-
-    get_selector_field_2() {
-        return this.field_2
-      }
 
     async enter_num_1(page, num: number){
         await page.click(this.field_1);
