@@ -3,10 +3,11 @@ import { PlaywrightTestConfig, devices } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  use: {
+  retries: process.env.CI ? 1 : 0,
+    use: {
     baseURL: 'http://www.uitestingplayground.com',
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
+    headless: true // set to false to see browser instance
   },
   projects: [
     {
