@@ -3,7 +3,8 @@ const MainPage = {
   elementDynamicId: 'a[href*="/dynamicid"]',
   elementClassAttr: 'a[href*="/classattr"]',
   elementHiddenLayers: 'a[href*="/hiddenlayers"]',
-  elementLoadDelay: 'a[href*="/loaddelay"]'
+  elementLoadDelay: 'a[href*="/loaddelay"]',
+  elementAjaxDelay: 'a[href*="/ajax"]'
 }
 const DynamicIdPage = {
   pageLink: MainPage.pageLink + "dynamicid",
@@ -28,8 +29,16 @@ const LoadDelay = {
   elementText: "Button Appearing After Delay",
 }
 
+const AjaxDelay = {
+  pageLink: MainPage.pageLink + "ajax",
+  elementAttr: 'button.btn-primary',
+  elementResultAttr: '[class="bg-success"]',
+  elementResultText: "Data loaded with AJAX get request.",
+}
+
 exports.MainPage = MainPage;
 exports.DynamicIdPage = DynamicIdPage;
 exports.ClassAttrPage = ClassAttrPage;
 exports.HiddenLayersPage = HiddenLayersPage;
 exports.LoadDelay = LoadDelay;
+exports.AjaxDelay = AjaxDelay
