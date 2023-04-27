@@ -2,7 +2,8 @@ const MainPage = {
   pageLink: "http://uitestingplayground.com/",
   elementDynamicId: 'a[href*="/dynamicid"]',
   elementClassAttr: 'a[href*="/classattr"]',
-  elementHiddenLayers: 'a[href*="/hiddenlayers"]'
+  elementHiddenLayers: 'a[href*="/hiddenlayers"]',
+  elementLoadDelay: 'a[href*="/loaddelay"]'
 }
 const DynamicIdPage = {
   pageLink: MainPage.pageLink + "dynamicid",
@@ -21,7 +22,14 @@ const HiddenLayersPage = {
   elementHiddenAttr: '[id="blueButton"]'
 }
 
+const LoadDelay = {
+  pageLink: MainPage.pageLink + "loaddelay",
+  elementAttr: "button.btn-primary",
+  elementText: "Button Appearing After Delay",
+}
+
 exports.MainPage = MainPage;
 exports.DynamicIdPage = DynamicIdPage;
 exports.ClassAttrPage = ClassAttrPage;
 exports.HiddenLayersPage = HiddenLayersPage;
+exports.LoadDelay = LoadDelay;

@@ -5,24 +5,26 @@ const utils = require('./clients/utils');
 describe("test uitestingplayground", () => {
 
   beforeEach(() => {
-    cy.visit(pages.MainPage.pageLink)
+    cy.visit(pages.MainPage.pageLink, { timeout: 10000})
   })
 
     it("test Dynamic ID page", () => {
-      utils.goToPageAndCheckRedirectedLocation(pages.MainPage.elementDynamicId, pages.DynamicIdPage.pageLink);
+      const testPage = pages.DynamicIdPage;
+      utils.goToPageAndCheckRedirectedLocation(pages.MainPage.elementDynamicId, testPage.pageLink);
 
-      utils.getElementByLabel(pages.DynamicIdPage.elementText).click();
-      utils.getElementByLabel(pages.DynamicIdPage.elementText).should('be.enabled');
+      utils.getElementByLabel(testPage.elementText).click();
+      utils.getElementByLabel(testPage.elementText).should('be.enabled');
       // Same with controlled timeout with Chai expect
       // Assertions will retry for up to 2 secs
-      utils.checkContainTextWithTimeout(pages.DynamicIdPage.elementText, 2000 );     
+      utils.checkContainTextWithTimeout(testPage.elementText, 2000 );     
     });
 
-    it("test class attr", () => {
-      utils.goToPageAndCheckRedirectedLocation(pages.MainPage.elementClassAttr, pages.ClassAttrPage.pageLink);
+    it("test class attr and check that button is enabled via get with timeout", () => {
+      const testPage = pages.ClassAttrPage;
+      utils.goToPageAndCheckRedirectedLocation(pages.MainPage.elementClassAttr, testPage.pageLink);
 
-      cy.get(pages.ClassAttrPage.elementAttr).click();
-      utils.checkGetWithTimeout(pages.ClassAttrPage.elementAttr, 2000 );     
+      cy.get(testPage.elementAttr).click();
+      utils.checkGetWithTimeout(testPage.elementAttr, 2000 );     
     });
 
     it("test hidden layer, check that green button can not be hit twice", () => {
@@ -42,6 +44,13 @@ describe("test uitestingplayground", () => {
       cy.get(testPage.elementHiddenAttr).should('exist');
       cy.get(testPage.elementAttr).shouldNotBeActionable;
       cy.get(testPage.elementHiddenAttr).shouldBeActionable;    
+    });
+
+    it("test page load delay and check button label", () => {
+      const testPage = pages.LoadDelay;
+      utils.goToPageAndCheckRedirectedLocation(pages.MainPage.elementLoadDelay, testPage.pageLink, 5000);
+      utils.checkGetWithTimeout(testPage.elementAttr, 2000 );     
+      cy.get(testPage.elementAttr).contains(testPage.elementText);
     });
 
   });

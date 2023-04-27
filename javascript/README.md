@@ -30,7 +30,7 @@ See:
 
 ## Run Test Suite
 ```
-// scip --headed if you want headless mode
+// skip --headed if you want headless mode
 npx cypress run --headed --spec "cypress/e2e/test_uitestingplayground.cy.js"
 ```
 

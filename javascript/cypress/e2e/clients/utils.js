@@ -1,9 +1,8 @@
-function goToPageAndCheckRedirectedLocation(elementHref, pageLink){
-  cy.get(elementHref).click().debug();
+function goToPageAndCheckRedirectedLocation(elementHref, pageLink, timeoutValue=2000){
+  cy.get(elementHref, { timeout: timeoutValue }).click().debug();
   cy.location("href").should("eq", pageLink);
 
 }
-
 
 function getElementByLabel(labelText) {
   return cy.contains(labelText);
