@@ -1,0 +1,16 @@
+{
+  "name": "uitestingplayground",
+  "version": "1.0.0",
+  "description": "npm init\r npm install cypress --save-dev\r npm install -g npm@9.6.3\r npm audit fix",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.10.0"
+  }
+}
