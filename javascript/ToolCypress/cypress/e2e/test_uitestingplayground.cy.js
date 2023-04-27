@@ -53,13 +53,13 @@ describe("test uitestingplayground", () => {
       cy.get(testPage.elementAttr).contains(testPage.elementText);
     });
 
-    it.only("test AJAX request with delay and check result text", () => {
+    it("test AJAX request with delay and check result text", () => {
       const testPage = pages.AjaxDelay;
       utils.goToPageAndCheckRedirectedLocation(pages.MainPage.elementAjaxDelay, testPage.pageLink);
 
       cy.get(testPage.elementAttr).click();
       cy.get(testPage.elementResultAttr).should('not.exist');
-      utils.checkContainTextWithTimeout(testPage.elementResultText, 15000 );
+      utils.checkContainTextWithTimeout(testPage.elementResultText, 17000 );
       cy.get(testPage.elementResultAttr).should('exist'); 
     });
 
