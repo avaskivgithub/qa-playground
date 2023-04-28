@@ -4,7 +4,7 @@
   "description": "```\r npm init\r npm install chai-http --save-dev\r ```",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter list 'tests/*.js' --recursive --timeout 60000 --exit"
+    "test": "mocha --reporter mocha-simple-html-reporter --reporter-options output=report.html 'tests/*.js' --recursive --timeout 60000 --exit"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "chai": "^4.3.7",
     "chai-http": "^4.3.0",
     "mocha": "^10.2.0",
-    "mocha-junit-reporter": "^2.2.0"
+    "mocha-junit-reporter": "^2.2.0",
+    "mocha-simple-html-reporter": "^2.0.0"
   }
 }

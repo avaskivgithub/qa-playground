@@ -5,7 +5,7 @@ module.exports = defineConfig({
     defaultCommandTimeout: 6000,
     pageLoadTimeout: 6000,
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      return require('./cypress/plugins/index.js')(on, config)
     },
   },
 });
