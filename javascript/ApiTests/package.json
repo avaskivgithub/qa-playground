@@ -1,0 +1,17 @@
+{
+  "name": "apitests",
+  "version": "1.0.0",
+  "description": "```\r npm init\r npm install chai-http --save-dev\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter list 'tests/*.js' --recursive --timeout 60000 --exit"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
+    "mocha-junit-reporter": "^2.2.0"
+  }
+}
