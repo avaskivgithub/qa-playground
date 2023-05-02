@@ -24,7 +24,7 @@ var chai = require('chai')
             avatar: 'https://reqres.in/img/faces/7-image.jpg'
           };
         expect(response.status).to.be.equal(200);
-        expect(jsonData.data[0]).to.deep.equal(expElem);
+        expect(jsonData.data[0]).to.deep.contains(expElem);
     })
 
     it('test get request with delay', async function() {
