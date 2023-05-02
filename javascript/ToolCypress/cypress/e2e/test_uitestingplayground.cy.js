@@ -1,4 +1,4 @@
-const pages = require('./clients/pages');
+const pages = require('./../../../pages_uitestingplayground');
 const utils = require('./clients/utils');
 
 

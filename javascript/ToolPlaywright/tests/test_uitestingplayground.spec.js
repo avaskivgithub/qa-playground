@@ -1,6 +1,6 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-const pages = require('./../../ToolCypress/cypress/e2e/clients/pages');
+const pages = require('./../../pages_uitestingplayground');
 const utils = require('./clients/utils');
 
 test.beforeEach(async ({ page }) => {
