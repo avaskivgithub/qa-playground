@@ -1,39 +1,60 @@
 const MainPage = {
   pageLink: "http://uitestingplayground.com/",
-  elementDynamicId: 'a[href*="/dynamicid"]',
-  elementClassAttr: 'a[href*="/classattr"]',
-  elementHiddenLayers: 'a[href*="/hiddenlayers"]',
-  elementLoadDelay: 'a[href*="/loaddelay"]',
-  elementAjaxDelay: 'a[href*="/ajax"]'
+  pageRefDynamicId: 'a[href*="/dynamicid"]',
+  pageRefClassAttr: 'a[href*="/classattr"]',
+  pageRefHiddenLayers: 'a[href*="/hiddenlayers"]',
+  pageRefLoadDelay: 'a[href*="/loaddelay"]',
+  pageRefAjaxDelay: 'a[href*="/ajax"]',
+  pageRefIgnoreDomClick: 'a[href*="/click"]',
+  pageRefTextInput: 'a[href*="/textinput"]',
+  pageRefScrollbars: 'a[href*="/scrollbars"]',
 }
 const DynamicIdPage = {
   pageLink: MainPage.pageLink + "dynamicid",
-  elementText: "Button with Dynamic ID",
+  btnText: "Button with Dynamic ID",
 }
 
 const ClassAttrPage = {
   pageLink: MainPage.pageLink + "classattr",
-  elementAttr: "button.btn-primary" // "//button[contains(concat(' ', normalize-space(@class), ' '), ' btn-primary ')]",
+  btnAttr: "button.btn-primary" // "//button[contains(concat(' ', normalize-space(@class), ' '), ' btn-primary ')]",
 }
 
 // [id="greenButton"] hiddenlayers
 const HiddenLayersPage = {
   pageLink: MainPage.pageLink + "hiddenlayers",
-  elementAttr: '[id="greenButton"]',
-  elementHiddenAttr: '[id="blueButton"]'
+  btnAttr: '[id="greenButton"]',
+  btnHiddenAttr: '[id="blueButton"]'
 }
 
 const LoadDelay = {
   pageLink: MainPage.pageLink + "loaddelay",
-  elementAttr: "button.btn-primary",
-  elementText: "Button Appearing After Delay",
+  btnAttr: "button.btn-primary",
+  btnText: "Button Appearing After Delay",
 }
 
 const AjaxDelay = {
   pageLink: MainPage.pageLink + "ajax",
-  elementAttr: 'button.btn-primary',
-  elementResultAttr: '[class="bg-success"]',
-  elementResultText: "Data loaded with AJAX get request.",
+  btnAttr: 'button.btn-primary',
+  btnResultAttr: '[class="bg-success"]',
+  pResultText: "Data loaded with AJAX get request.",
+}
+
+const IgnoreDomClick = {
+  pageLink: MainPage.pageLink + "click",
+  btnAttr: "button.btn-primary",
+  btnHiddenAttr: 'button.btn-success',
+}
+
+const TextInput = {
+  pageLink: MainPage.pageLink + "textinput",
+  btnAttr: "button.btn-primary",
+  btnText: "Button That Should Change it's Name Based on Input Value",
+  textInput: '[id="newButtonName"]',
+}
+
+const Scrollbars = {
+  pageLink: MainPage.pageLink + "scrollbars",
+  btnAttr: "button.btn-primary",
 }
 
 exports.MainPage = MainPage;
@@ -41,4 +62,7 @@ exports.DynamicIdPage = DynamicIdPage;
 exports.ClassAttrPage = ClassAttrPage;
 exports.HiddenLayersPage = HiddenLayersPage;
 exports.LoadDelay = LoadDelay;
-exports.AjaxDelay = AjaxDelay
+exports.AjaxDelay = AjaxDelay;
+exports.IgnoreDomClick = IgnoreDomClick;
+exports.TextInput = TextInput;
+exports.Scrollbars = Scrollbars;
