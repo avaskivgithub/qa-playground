@@ -8,6 +8,7 @@ const MainPage = {
   pageRefIgnoreDomClick: 'a[href*="/click"]',
   pageRefTextInput: 'a[href*="/textinput"]',
   pageRefScrollbars: 'a[href*="/scrollbars"]',
+  pageRefDynamictable: 'a[href*="/dynamictable"]',
 }
 const DynamicIdPage = {
   pageLink: MainPage.pageLink + "dynamicid",
@@ -57,6 +58,16 @@ const Scrollbars = {
   btnAttr: "button.btn-primary",
 }
 
+const Dynamictable = {
+  pageLink: MainPage.pageLink + "dynamictable",
+  tableAttr: '[role="table"]',
+  rowgroupAttr: '[role="rowgroup"]',
+  rowAttr: '[role="row"]',
+  columnheaderAttr: '[role="columnheader"]',
+  cellAttr: '[role="cell"]',
+  labelAttr: '[class="bg-warning"]',
+}
+
 exports.MainPage = MainPage;
 exports.DynamicIdPage = DynamicIdPage;
 exports.ClassAttrPage = ClassAttrPage;
@@ -66,3 +77,4 @@ exports.AjaxDelay = AjaxDelay;
 exports.IgnoreDomClick = IgnoreDomClick;
 exports.TextInput = TextInput;
 exports.Scrollbars = Scrollbars;
+exports.Dynamictable = Dynamictable;

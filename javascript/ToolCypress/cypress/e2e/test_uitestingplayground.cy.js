@@ -104,4 +104,41 @@ describe("UI Test Automation Playground http://uitestingplayground.com/", () => 
 
       cy.get(testPage.btnAttr).shouldBeActionable;   
     });
+
+    it.only("Dynamictable: check table content", () => {
+      const testPage = pages.Dynamictable;
+      let expectedValue;
+      let actualValueIndex = -1;
+
+      utils.goToPageAndCheckRedirectedLocation(pages.MainPage.pageRefDynamictable, testPage.pageLink);
+
+      cy.get(testPage.labelAttr).then(($value) => {
+        expectedValue = $value.text().split(': ')[1];
+        cy.wrap(expectedValue).as('expectedValue');
+
+        let cpuIndex;
+        cy.get(testPage.tableAttr).find(testPage.rowgroupAttr).first()
+          .get(testPage.rowAttr).get(testPage.columnheaderAttr).then((rows) => {
+            rows.toArray().forEach((element) => {
+              if (element.innerHTML.includes("CPU")) {
+                cpuIndex = rows.index(element);
+                cy.wrap(cpuIndex).as('cpuIndex');
+              }
+            });
+        });
+
+        cy.get(testPage.cellAttr).each(($cel, index, $list)=> {
+            const t = $cel.text();
+            //cy.log(t);
+            if (t.includes('Chrome')){
+              actualValueIndex = index;
+            }
+            if (actualValueIndex >= 0 && index == (actualValueIndex + cpuIndex)) {
+              expect(t).eq(expectedValue);
+            }
+        });
+
+      });
+    });
+
   });
