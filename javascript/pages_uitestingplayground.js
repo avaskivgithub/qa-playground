@@ -9,7 +9,9 @@ const MainPage = {
   pageRefTextInput: 'a[href*="/textinput"]',
   pageRefScrollbars: 'a[href*="/scrollbars"]',
   pageRefDynamictable: 'a[href*="/dynamictable"]',
+  pageRefProgressbar: 'a[href*="/progressbar"]',
 }
+
 const DynamicIdPage = {
   pageLink: MainPage.pageLink + "dynamicid",
   btnText: "Button with Dynamic ID",
@@ -68,6 +70,14 @@ const Dynamictable = {
   labelAttr: '[class="bg-warning"]',
 }
 
+const Progressbar = {
+  pageLink: MainPage.pageLink + "progressbar",
+  progressbarAttr: '[id="progressBar"]',
+  btnStartAttr: '[id="startButton"]',
+  btnStopAttr: '[id="stopButton"]',
+  attrProgressValue: 'aria-valuenow'
+}
+
 exports.MainPage = MainPage;
 exports.DynamicIdPage = DynamicIdPage;
 exports.ClassAttrPage = ClassAttrPage;
@@ -78,3 +88,4 @@ exports.IgnoreDomClick = IgnoreDomClick;
 exports.TextInput = TextInput;
 exports.Scrollbars = Scrollbars;
 exports.Dynamictable = Dynamictable;
+exports.Progressbar = Progressbar;

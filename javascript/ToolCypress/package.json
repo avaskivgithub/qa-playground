@@ -12,6 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^12.10.0",
-    "cypress-email-results": "^1.8.0"
+    "cypress-email-results": "^1.8.0",
+    "cypress-wait-until": "^1.7.2"
   }
 }

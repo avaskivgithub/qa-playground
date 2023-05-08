@@ -1,11 +1,12 @@
 const pages = require('./../../../pages_uitestingplayground');
 const utils = require('./clients/utils');
+import 'cypress-wait-until';
 
 
 describe("UI Test Automation Playground http://uitestingplayground.com/", () => {
 
   beforeEach(() => {
-    cy.visit(pages.MainPage.pageLink, { timeout: 10000})
+    cy.visit(pages.MainPage.pageLink, { timeout: 10000});
   })
 
     it("Dynamic ID: test Dynamic ID page", () => {
@@ -105,7 +106,7 @@ describe("UI Test Automation Playground http://uitestingplayground.com/", () => 
       cy.get(testPage.btnAttr).shouldBeActionable;   
     });
 
-    it.only("Dynamictable: check table content", () => {
+    it("Dynamictable: check table content", () => {
       const testPage = pages.Dynamictable;
       let expectedValue;
       let actualValueIndex = -1;
@@ -141,4 +142,25 @@ describe("UI Test Automation Playground http://uitestingplayground.com/", () => 
       });
     });
 
-  });
+
+    it("Progressbar: stop progress at 35%", () => {
+      const testPage = pages.Progressbar;
+
+      utils.goToPageAndCheckRedirectedLocation(pages.MainPage.pageRefProgressbar, testPage.pageLink);
+
+      cy.get(testPage.btnStartAttr).click();
+      //https://www.npmjs.com/package/cypress-wait-until
+      // cy.waitUntil(() => { return cy.get('[style="width: 28%"]').should('not.exist'); })
+
+      cy.waitUntil(() =>
+        cy.get(testPage.progressbarAttr).invoke('attr', testPage.attrProgressValue).then((value) => parseInt(value) >= 35),
+        {
+          timeout: 30000, // waits up to 2000 ms, default to 5000
+          interval: 100 // performs the check every 100 ms, default to 200
+        });
+
+      cy.get(testPage.btnStopAttr).click();
+      cy.get(testPage.progressbarAttr).invoke('text').should('eq', '35%');
+    });
+
+});
