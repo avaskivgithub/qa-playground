@@ -163,4 +163,29 @@ describe("UI Test Automation Playground http://uitestingplayground.com/", () => 
       cy.get(testPage.progressbarAttr).invoke('text').should('eq', '35%');
     });
 
+    it('Visibility', () => {
+      const testPage = pages.ButtonsTable;
+
+      utils.goToPageAndCheckRedirectedLocation(pages.MainPage.pageRefVisibility, testPage.pageLink);
+
+      cy.get('td').each(($cel, index, $list)=> {
+        $cel.find('button').shouldBeActionable;
+        cy.wrap($cel).find('button', {timeout:100}).should('be.visible');   
+      });
+
+      cy.get(testPage.btnHideAttr).click();
+      cy.get(testPage.btnHideAttr).should('be.visible');
+      cy.get(testPage.btn1Attr).should('not.exist');
+      // TBD: btn 1 / 3 / 7 should('not.be.visible') doesn't work
+      //cy.get(testPage.btn3Attr).click();
+      //cy.get(testPage.btn7Attr).click();//should('not.be.visible');
+
+      const inxs = new Set([2, 4, 5, 6]);
+      cy.get('td').each(($cel, index, $list)=> {
+        if (inxs.has(index)){
+          cy.wrap($cel).find('button', {timeout:100}).should('not.be.visible');
+        }
+      });      
+    });
+
 });

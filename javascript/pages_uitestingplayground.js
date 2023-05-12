@@ -10,6 +10,7 @@ const MainPage = {
   pageRefScrollbars: 'a[href*="/scrollbars"]',
   pageRefDynamictable: 'a[href*="/dynamictable"]',
   pageRefProgressbar: 'a[href*="/progressbar"]',
+  pageRefVisibility: 'a[href*="/visibility"]',
 }
 
 const DynamicIdPage = {
@@ -78,6 +79,14 @@ const Progressbar = {
   attrProgressValue: 'aria-valuenow'
 }
 
+const ButtonsTable = {
+  pageLink: MainPage.pageLink + "visibility",
+  btnHideAttr: 'button.btn-primary',
+  btn1Attr: '[id="removedButton"]',
+  btn3Attr: '[id="overlappedButton"]',
+  btn7Attr: '[id="offscreenButton"]',
+}
+
 exports.MainPage = MainPage;
 exports.DynamicIdPage = DynamicIdPage;
 exports.ClassAttrPage = ClassAttrPage;
@@ -89,3 +98,4 @@ exports.TextInput = TextInput;
 exports.Scrollbars = Scrollbars;
 exports.Dynamictable = Dynamictable;
 exports.Progressbar = Progressbar;
+exports.ButtonsTable = ButtonsTable;

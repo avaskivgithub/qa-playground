@@ -1,5 +1,5 @@
 function goToPageAndCheckRedirectedLocation(elementHref, pageLink, timeoutValue=2000){
-  cy.get(elementHref, { timeout: timeoutValue }).click().debug();
+  cy.get(elementHref, { timeout: timeoutValue }).click(); //.debug();
   cy.location("href").should("eq", pageLink);
 
 }
