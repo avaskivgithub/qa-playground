@@ -1,0 +1,16 @@
+{
+  "name": "toolselenium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha tests/**/*.js --timeout 60000"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chromedriver": "^113.0.0",
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.9.2"
+  }
+}

@@ -15,6 +15,7 @@ const MainPage = {
 
 const DynamicIdPage = {
   pageLink: MainPage.pageLink + "dynamicid",
+  btnAttr: "button.btn-primary",
   btnText: "Button with Dynamic ID",
 }
 
