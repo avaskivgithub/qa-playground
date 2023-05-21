@@ -1,0 +1,13 @@
+{
+  "name": "toolplaywright",
+  "version": "1.0.0",
+  "description": "```\r npm init playwright@latest\r ```",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.33.0"
+  }
+}
