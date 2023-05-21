@@ -19,3 +19,9 @@ npm install chromedriver --chromedriver_version=LATEST --save-dev
 npm test
 ```
 
+## Debugging
+* Didn't work because it requires Visual Studio to be installed
+```
+npm install -g node-inspector
+```
+* TBD: find what is the easiest way to debuge this?  
