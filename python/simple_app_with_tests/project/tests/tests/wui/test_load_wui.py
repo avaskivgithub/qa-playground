@@ -1,6 +1,4 @@
-import nose.tools as nose_tools
 import time
-from nose.plugins.attrib import attr
 import os
 from tests.clients.loadcl import Load, load_with_multiprocessing
 from tests.clients.system_monitoring.monitor_deploy import SystemMonitoringServerDeploy
@@ -36,7 +34,6 @@ class TestLoadWUI(Base):
         cls.monitor.stop_top_monitor_server(cls.result_dir, cls.component_version)
         super(TestLoadWUI, cls).tearDownClass()
 
-    @attr(id='LWUI-1')
     def test_root_500_requests_500_concurrency(self):
         """Load http://127.0.0.1:5000/ by 500 requests sent simultaneously"""
 
@@ -54,10 +51,9 @@ class TestLoadWUI(Base):
         load_cl.draw_elapsed_time_distribution(output_file=output_file)
 
         print(load_cl.get_results_distribution())
-        nose_tools.assert_equals({200: requests_number}, load_cl.get_results_distribution(),
-                        'Instead of 200 for all requests were returned {}'.format(load_cl.get_results_distribution()))
+        assert {200: requests_number} == load_cl.get_results_distribution()
+                        #'Instead of 200 for all requests were returned {}'.format(load_cl.get_results_distribution()))
 
-    @attr(id='LWUI-1_multip')
     def _test_root_500_requests_500_concurrency_multiprocessing(self):
         """Load http://127.0.0.1:5000/ by 500 requests sent simultaneously"""
 
@@ -81,8 +77,8 @@ class TestLoadWUI(Base):
                                                                       res_func=_procces_response)
 
         print(results_distribution)
-        nose_tools.assert_equals({200: requests_number}, results_distribution,
-                        'Instead of 200 for all requests were returned {}'.format(results_distribution))
+        assert {200: requests_number} == results_distribution
+                        #'Instead of 200 for all requests were returned {}'.format(results_distribution))
 
 # EOF
 

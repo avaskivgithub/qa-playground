@@ -41,6 +41,15 @@ python\simple_app_with_tests\project> python api_server.py
 python\simple_app_with_tests\project> python web_gui.py
 ```
 
+Note that venv is a better option for setup https://cheatography.com/ilyes64/cheat-sheets/python-virtual-environments/
+```
+pip install virtualenv
+pip install virtualenvwrapper-win
+
+python -m venv myvenv1
+.\myvenv1\Scripts\activate
+```
+
 ### Test
 When api and GUI were started you can manually try them and run automated system tests example.
 
@@ -68,21 +77,15 @@ Invoke-RestMethod 'http://127.0.0.1:12345/add' -Method Post -Body $json -Content
 #### GUI
 Just open in your browser http://localhost:5000/ 
 
-#### Automated System Tests
+### Automated System Tests
 Ran the example of system tests
 ```
-# from the root repo directory
-> cd python\simple_app_with_tests
-python\simple_app_with_tests> nosetests --ignore-file="test_.*(wui|load).*.py" -v project/tests/tests/
-
-Check /getall when Results table is empty ... ok
-Check /getall when there are tests in the Results table ... ok
-
-----------------------------------------------------------------------
-Ran 2 tests in 0.047s
-
-OK
+qa-playground\python\simple_app_with_tests\project> pytest -q .\tests\tests\api\test_api.py
+qa-playground\python\simple_app_with_tests\project> pytest -q .\tests\tests\wui\test_wui.py
 ```
+
+* For load tests need to install gnuplot on Windows and refactor hardcoded tmp dir in the draw_gnuplot function
+http://spiff.rit.edu/classes/ast601/gnuplot/install_windows.html
 
 # Tasks
 Possible questions for a newcomer:

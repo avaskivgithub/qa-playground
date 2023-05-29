@@ -1,5 +1,3 @@
-import nose.tools as nose_tools
-from nose.plugins.attrib import attr
 import os
 from tests.clients.loadcl import Load
 from tests.clients.system_monitoring.monitor_deploy import SystemMonitoringServerDeploy
@@ -25,7 +23,6 @@ class TestLoadAPI(Base):
         cls.monitor.stop_top_monitor_server(cls.result_dir, cls.component_version)
         super(TestLoadAPI, cls).tearDownClass()
 
-    @attr(id='LAPI-1')
     def test_get_all_1000_requests(self):
         """Check /getall with 1000 requests sent with rate=100
         """
@@ -42,10 +39,9 @@ class TestLoadAPI(Base):
         load_cl.load_app()
         load_cl.draw_elapsed_time_distribution(output_file=output_file)
 
-        nose_tools.assert_equals({200: requests_number}, load_cl.get_results_distribution(),
-                        'Instead of 200 for all requests were returned {}'.format(load_cl.get_results_distribution()))
+        assert load_cl.get_results_distribution() == {200: requests_number}
+                        # 'Instead of 200 for all requests were returned {}'.format(load_cl.get_results_distribution()))
 
-    @attr(id='LAPI-2')
     def test_edit_1000_requests(self):
         """Check /add with 1000 requests sent with rate=100 when edit the same record
         """
@@ -72,5 +68,4 @@ class TestLoadAPI(Base):
         load_cl.load_app()
         load_cl.draw_elapsed_time_distribution(output_file=output_file)
 
-        nose_tools.assert_equals({200: requests_number}, load_cl.get_results_distribution(),
-                        'Instead of 200 for all requests were returned {}'.format(load_cl.get_results_distribution()))
+        assert load_cl.get_results_distribution() == {200: requests_number}
