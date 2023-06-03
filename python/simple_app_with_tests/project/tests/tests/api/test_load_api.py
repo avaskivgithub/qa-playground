@@ -1,9 +1,10 @@
+import pytest
 import os
 from tests.clients.loadcl import Load
 from tests.clients.system_monitoring.monitor_deploy import SystemMonitoringServerDeploy
 from tests.tests.base import Base
 
-
+@pytest.mark.load
 class TestLoadAPI(Base):
 
     @classmethod

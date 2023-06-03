@@ -1,4 +1,4 @@
-import time
+import pytest
 import os
 from tests.clients.loadcl import Load, load_with_multiprocessing
 from tests.clients.system_monitoring.monitor_deploy import SystemMonitoringServerDeploy
@@ -15,6 +15,7 @@ def _procces_response(result):
 
     return res
 
+@pytest.mark.load
 class TestLoadWUI(Base):
 
     @classmethod

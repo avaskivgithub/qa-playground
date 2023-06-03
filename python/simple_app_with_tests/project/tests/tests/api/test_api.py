@@ -1,9 +1,7 @@
-#import nose.tools as nose_tools
-#from nose.plugins.attrib import attr
-
+import pytest
 from tests.tests.base import Base
 
-
+@pytest.mark.basic
 class TestAPI(Base):
 
     def test_get_all_with_data(self):

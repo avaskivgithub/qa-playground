@@ -2,8 +2,10 @@
 import time
 from collections import OrderedDict
 from tests.tests.wui.base import BaseWUI
+import pytest
 
 
+@pytest.mark.basic
 class TestWUI(BaseWUI):
 
     def test_get_all_empty_table(self):

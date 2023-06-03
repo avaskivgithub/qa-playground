@@ -80,8 +80,7 @@ Just open in your browser http://localhost:5000/
 ### Automated System Tests
 Ran the example of system tests
 ```
-qa-playground\python\simple_app_with_tests\project> pytest -q .\tests\tests\api\test_api.py
-qa-playground\python\simple_app_with_tests\project> pytest -q .\tests\tests\wui\test_wui.py
+qa-playground\python\simple_app_with_tests\project> pytest -vvv -q .\tests\tests --disable-warnings -m basic
 ```
 
 * For load tests need to install gnuplot on Windows and refactor hardcoded tmp dir in the draw_gnuplot function

@@ -12,7 +12,9 @@ eggs_list = ['flask>=2.2.2',
             'typing-extensions',
             'urllib3==1.26.6',
             'chardet',
-            'idna']
+            'idna',
+            'paramiko',
+            'cryptography>=3.3']
 if sys.version_info < (3,0):
       eggs_list = ['flask',
             'requests',
