@@ -113,3 +113,6 @@ For details about "Test App":
 * [see app's backlog](simple_app_with_tests/docs/backlog) and [1st sprint](simple_app_with_tests/docs/sprint1) plain text data (in real world you'll use some bug and issue tracker for this)
 * [see app's code base](simple_app_with_tests/project/app)
 * [see app's system tests](simple_app_with_tests/project/tests) (in real world you'll also have unit and integration tests)
+
+# Links
+* take a look at examples from https://github.com/seleniumbase/SeleniumBase/blob/master/examples/ReadMe.md

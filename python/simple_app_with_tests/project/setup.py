@@ -8,13 +8,15 @@ eggs_list = ['flask>=2.2.2',
             'selenium',
             'gevent',
             'pytest',
+            'parameterized==0.8.1',
             'zipp',
             'typing-extensions',
             'urllib3==1.26.6',
             'chardet',
             'idna',
             'paramiko',
-            'cryptography>=3.3']
+            'cryptography>=3.3'
+            ]
 if sys.version_info < (3,0):
       eggs_list = ['flask',
             'requests',
