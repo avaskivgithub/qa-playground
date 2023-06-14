@@ -15,7 +15,8 @@ eggs_list = ['flask>=2.2.2',
             'chardet',
             'idna',
             'paramiko',
-            'cryptography>=3.3'
+            'cryptography>=3.3',
+            'werkzeug==0.16.0'
             ]
 if sys.version_info < (3,0):
       eggs_list = ['flask',
@@ -32,7 +33,8 @@ setup(name='test-playground',
       description='Test playground',
       author='Andriana Vaskiv',
       author_email='andriana.vaskiv@gmail.com',
-      install_requires=eggs_list)
+      install_requires=eggs_list,
+      py_modules=[])
 
 
 # EOF

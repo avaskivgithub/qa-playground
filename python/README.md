@@ -91,18 +91,7 @@ Possible questions for a newcomer:
 * Look for "Test App" issues
 * Create a test design for "Test App" 
 * What risks do you see in the sugested design of the "Test App"
-* Fix tests for GUI. See stack trace from running
-```
-# from the root repo directory
-> cd python\simple_app_with_tests
-python\simple_app_with_tests> nosetests --ignore-file="test_.*load.*.py" -v project/tests/tests/
-```
-* Fix load tests. See stack trace from running
-```
-# from the root repo directory
-> cd python\simple_app_with_tests
-python\simple_app_with_tests> nosetests -v project/tests/tests/
-```
+* Fix warnings suppressed by --disable-warnings 
 * Extend the functionality of the "Test App" by adding one more feature
 * Extend the test base
 
