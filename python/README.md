@@ -13,9 +13,14 @@ You'll need:
 # on Windows it was tested with
 > python --version
 Python 3.7.0
+
+# on Linux with 
+Python 3.10.12
 ```
 
 ## Setup
+
+### Windows
 * install all required python packages by running from the python\simple_app_with_tests\project directory
 ```
 # from the root repo directory
@@ -41,6 +46,22 @@ python\simple_app_with_tests\project> python api_server.py
 python\simple_app_with_tests\project> python web_gui.py
 ```
 
+### Linux
+Start / Stop test application
+```
+# from root dir execute shell script to start api and wui:
+> cd <root dir of the simple_app_with_tests>
+> bash control.sh
+
+# for stopping api and wui:
+> cd <root dir of the simple_app_with_tests>
+> bash control.sh stop
+
+# to view web and api logs:
+> tail -F /tmp/web_gui.py.log /tmp/api_server.py.log
+```
+
+### Python venv
 Note that venv is a better option for setup https://cheatography.com/ilyes64/cheat-sheets/python-virtual-environments/
 ```
 pip install virtualenv
@@ -50,10 +71,10 @@ python -m venv myvenv1
 .\myvenv1\Scripts\activate
 ```
 
-### Test
+## Test
 When api and GUI were started you can manually try them and run automated system tests example.
 
-#### REST Api
+### REST Api
 Following examples are for Poweshell (for bash examples with curl see doc strings in the [api_server.py](simple_app_with_tests/project/app/api_server.py) )
 ```
 # get all
@@ -74,11 +95,12 @@ $json = '{"Res": 1, "Description": null, "Error": null, "Id": 111, "Name": "Test
 Invoke-RestMethod 'http://127.0.0.1:12345/add' -Method Post -Body $json -ContentType 'application/json'
 ```
 
-#### GUI
+### GUI
 Just open in your browser http://localhost:5000/ 
 
 ### Automated System Tests
-Ran the example of system tests
+Ran the example of system tests:
+* On Windows
 ```
 qa-playground\python\simple_app_with_tests\project> pytest -vvv -q .\tests\tests --disable-warnings -m basic
 ```
@@ -86,8 +108,13 @@ qa-playground\python\simple_app_with_tests\project> pytest -vvv -q .\tests\tests
 * For load tests need to install gnuplot on Windows and refactor hardcoded tmp dir in the draw_gnuplot function
 http://spiff.rit.edu/classes/ast601/gnuplot/install_windows.html
 
+* On Linux just run all tests
+```
+qa-playground/python/simple_app_with_tests$ pytest -vvv -q project/tests/tests/ --disable-warnings
+```
+
 # Tasks
-Possible questions for a newcomer:
+Possigit config --global user.name "Your Name"ble questions python/simple_app_with_tests/project/setup.pyfor a newcomer:
 * Look for "Test App" issues
 * Create a test design for "Test App" 
 * What risks do you see in the sugested design of the "Test App"
