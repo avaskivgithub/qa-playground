@@ -1,4 +1,5 @@
 import time, os, subprocess
+# https://gnuplot.sourceforge.net/demo/
 
 def draw_gnuplot_chart(data_files_paths,
                         result_dir,

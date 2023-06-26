@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 logging.basicConfig(level=logging.DEBUG)
 
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import selenium.webdriver.support.ui as ui
 from selenium.common.exceptions import NoSuchElementException
 
@@ -15,10 +16,10 @@ class WUI(object):
     """
         Wrapper for webdriver calls.
     """
-    def __init__(self, profile=webdriver.FirefoxProfile(), wait_timeout=5):
+    def __init__(self, profile=FirefoxOptions(), wait_timeout=5):
 
         # profile.set_preference("webdriver_enable_native_events", False)
-        self.driver = webdriver.Firefox(profile)
+        self.driver = webdriver.Firefox(options=profile)
         self.driver.implicitly_wait(30)
 
     # =============== Page Properties / Elements ============

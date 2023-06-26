@@ -1,4 +1,5 @@
 This readme was created for Python 2, so some instructions can be obsolete.
+* https://askubuntu.com/questions/320996/how-to-make-python-program-command-execute-python-3
 
 **********************
 OVERVIEW "Test App"
@@ -23,7 +24,7 @@ Now Install test-playground and python packages:
 For LINUX:
 sudo zypper install sqlite3 sqlite3-devel # open suse
 sudo yum install sqlite3 sqlite3-devel # fedora
-sudo apt-get install sqlite3  sqlite3-devel # ubuntu
+sudo apt-get install sqlite3 libsqlite3-dev # ubuntu
 
 For WINDOWS:
 install sqlite using next instructions: http://mislav.net/rails/install-sqlite3/
@@ -36,6 +37,9 @@ sudo zypper install gnuplot
 
 # ==== From root dir/project
 > sudo python setup.py develop
+
+Troubleshooting:
+* https://stackoverflow.com/questions/47884709/python-importerror-no-module-named-pluggy 
 
 ********************************
 START / STOP "Test App" on LINUX
@@ -81,4 +85,5 @@ Api saves data into sqlite db with only one "Results" table with fields (Id, Nam
 RUN tests for "Test App"
 **********************
 > cd <root dir of the simple_app_with_tests>
-> nosetests -v project/tests/tests/
+> pytest -vvv -q project/tests/tests/  --disable-warnings
+> pytest -vvv -q project/tests/tests/api  --disable-warnings

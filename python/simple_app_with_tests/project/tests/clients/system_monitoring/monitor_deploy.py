@@ -1,7 +1,7 @@
 import os, time, subprocess
 import paramiko
 import logging
-from monitor_core import load_apps_for_test_results
+# from monitor_core import load_apps_for_test_results
 
 def with_open_connection(func):
 
@@ -108,7 +108,7 @@ if __name__ == '__main__':
 
     try:
         deployer.start_top_monitor_server(result_dir, component_version)
-        load_apps_for_test_results(time_to_run=10)
+        #load_apps_for_test_results(time_to_run=10)
     finally:
         deployer.stop_top_monitor_server(result_dir, component_version)
 
