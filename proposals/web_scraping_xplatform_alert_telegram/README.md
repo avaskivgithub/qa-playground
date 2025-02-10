@@ -28,6 +28,7 @@ python bot_alert.py
 python bot.py
 ```
 In the telegram you'll see messages like:
+
 ![Alert in the telegram](bot.png)
 
 ##
