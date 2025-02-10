@@ -31,9 +31,14 @@ namespace RestApi
                             // https://medium.com/@the.green.man/set-up-https-on-local-with-net-core-and-docker-7a41f030fc76
                             dotnet user-secrets set "Kestrel:Certificates:Development:Password" "Hidden Secret"
 
-                            dotnet dev-certs https --clean
-                            dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p "Hidden Secret"
-                            dotnet dev-certs https --trust
+                            TestApp\RestApi> dotnet dev-certs https --clean
+                            TestApp\RestApi> dotnet dev-certs https -ep aspnetapp.pfx -p "Hidden Secret"
+                            TestApp\RestApi> dotnet dev-certs https --trust
+                            TestApp\RestApi> dotnet user-secrets -p .\RestApi.csproj init
+                            TestApp\RestApi> dotnet user-secrets -p .\RestApi.csproj set "Kestrel:Certificates:Development:Password" "Hidden Secret"
+
+                            To get rid of net::ERR_CERT_INVALID go to:
+                            chrome://flags/#allow-insecure-localhost and disable 'WebTransport Developer Mode'
 
                             qa-playground\dotnet\TestApp> docker build -t avaskiv/restapi .
                             docker run --rm -it `

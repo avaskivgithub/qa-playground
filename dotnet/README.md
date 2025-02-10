@@ -2,13 +2,25 @@
 A playground for testing a "Test App" written using DotNet.
 
 ## TestApp
-"Test App":
+"Test App" is a rudimentary application:
 * Uses sqlite as a backend with a single table Results that has (Id, Name, Description, Res, Error) fields
 * REST Api ( https://localhost:5001/results ) to do CRUD operations on the Results table records
 * MVC UI https://localhost:6001/ that talks to REST Api 
+![Screenshots](.\UI_API_collage.png)
+
 
 ### Setup
-Start both REST Api and MVC UI (each in separate terminal)
+* Create a self-signed certificate
+```
+TestApp\RestApi> dotnet dev-certs https --clean
+TestApp\RestApi> dotnet dev-certs https -ep aspnetapp.pfx -p "Hidden Secret"
+TestApp\RestApi> dotnet dev-certs https --trust
+TestApp\RestApi> dotnet user-secrets -p .\RestApi.csproj init
+TestApp\RestApi> dotnet user-secrets -p .\RestApi.csproj set "Kestrel:Certificates:Development:Password" "Hidden Secret"
+```
+* To get rid of net::ERR_CERT_INVALID in chrome go to: chrome://flags/#allow-insecure-localhost and disable "WebTransport Developer Mode"
+
+* Start both REST Api and MVC UI (each in separate terminal)
 ```
 # open terminal and cd qa-playground\dotnet\TestApp\RestApi
 qa-playground\dotnet\TestApp\RestApi> dotnet restore
