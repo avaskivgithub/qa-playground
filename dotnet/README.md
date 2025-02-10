@@ -6,7 +6,7 @@ A playground for testing a "Test App" written using DotNet.
 * Uses sqlite as a backend with a single table Results that has (Id, Name, Description, Res, Error) fields
 * REST Api ( https://localhost:5001/results ) to do CRUD operations on the Results table records
 * MVC UI https://localhost:6001/ that talks to REST Api 
-![Screenshots](.\UI_API_collage.png)
+![Screenshots](UI_API_collage.png)
 
 
 ### Setup
