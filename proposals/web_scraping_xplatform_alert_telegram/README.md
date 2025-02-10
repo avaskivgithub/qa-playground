@@ -27,5 +27,13 @@ python bot_alert.py
 ```
 python bot.py
 ```
+In the telegram you'll see messages like:
+![Alert in the telegram](bot.png)
 
-Note: if you haven't set the telegram token, then in logs you'll have 'SOURCE:' messages with looked up data
+##
+_**Note:**_ if you haven't set the telegram token, then in logs you'll have 'SOURCE:' messages with looked up data
+
+## TOBD
+1. Add reading telegram token from the environment variables
+2. Add workarounds against blocking
+3. Add paralelism
