@@ -12,3 +12,6 @@ $env:PWDEBUG=1
 # to disable debug
 $env:PWDEBUG=""
 ```
+
+## Devices
+The current full list of [devices](https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json) supported by Playwright.
