@@ -54,8 +54,9 @@ def ask_ai_chat(question, wait_response=7):
         button.click()
         elem.send_keys(" ")
 
-        # create action chain object
+        # Take a snapshot
         action = ActionChains(driver)
+        driver.save_screenshot('chat_ai_screenshot.png')
         
         # perform the operation
         action.key_down(Keys.CONTROL).send_keys('V').key_up(Keys.CONTROL).perform()
