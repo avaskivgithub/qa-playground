@@ -1,5 +1,6 @@
 using Tests.Clients;
 using Tests.Models;
+using Tests.Fixtures;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net;
@@ -14,22 +15,20 @@ namespace Tests.TestsApi
     [TestFixture]
     public class GetUsers
     {
-        private string testEndpoint = "/api/users";
+        private string testEndpoint;
         private ApiClient api;
-
 
         [OneTimeSetUp]
         public async Task  SetupAsync()
         {
+            testEndpoint = FixtureConfiguration.GetSetting("ApiEndpointsUsers");
             api = new ApiClient();
         }
-
 
         [OneTimeTearDown]
         public async Task TeardownAsync()
         {
         }
-
 
         public async Task<Result> ReadResponseBodyFromRequest(HttpResponseMessage responseMessage)
         {
@@ -41,7 +40,6 @@ namespace Tests.TestsApi
             return actualResponseBody;
         }
 
-
         [Test]
         public async Task GetUsers_Page2_200WithBody()
         {
@@ -49,7 +47,7 @@ namespace Tests.TestsApi
 
             // Act
             HttpResponseMessage responseMessage = await api.GetAsync(
-                testEndpoint + "?page=2"
+                testEndpoint // + "?page=2"
                 );
             Result actualResponseBody = await ReadResponseBodyFromRequest(responseMessage);
 
