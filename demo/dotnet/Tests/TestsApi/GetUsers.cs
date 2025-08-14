@@ -12,6 +12,7 @@ namespace Tests.TestsApi
     /// <summary>
     /// Smoke tests to check test api
     /// </summary>
+    [Parallelizable(ParallelScope.All)]
     [TestFixture]
     public class GetUsers
     {
@@ -36,7 +37,8 @@ namespace Tests.TestsApi
             Console.WriteLine(responseContent);
             Result actualResponseBody = JsonConvert.DeserializeObject<Result>(responseContent);
 
-
+            // Mocked delay to test out [Parallelizable(ParallelScope.All)]
+            System.Threading.Thread.Sleep(2000);
             return actualResponseBody;
         }
 
@@ -89,11 +91,13 @@ namespace Tests.TestsApi
                 Assert.That(firstItem.email, Is.EqualTo("george.bluth@reqres.in"), "First item email mismatch");
             });
         }
-        
+
         [TestCase("page", 1)]
         [TestCase("per_page", 6)]
         [TestCase("total", 12)]
         [TestCase("total_pages", 2)]
+        // [Ignore("Skipping this test temporarily")]
+        // [Parallelizable(ParallelScope.Self)]
         public async Task GetUsers_ResultsFieldValidation(
             string fieldName,
             int expectedValue)
