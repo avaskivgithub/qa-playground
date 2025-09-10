@@ -17,9 +17,11 @@ qa-playground\demo\dotnet\Tests> cp appsettings.test_local.json appsettings.test
 ```
 
 ## Run Tests
-- To run tests
+- To run tests all or from the specific folder
 ```
+cd .\qa-playground\demo\dotnet\Tests
 dotnet clean; dotnet test --logger "console;verbosity=detailed"
+dotnet clean; dotnet test --logger "console;verbosity=detailed" --filter FullyQualifiedName~Tests.TestsApi
 ```
 - To run tests with html results
 ```
