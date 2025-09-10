@@ -97,7 +97,7 @@ namespace Tests.TestsApi
         [TestCase("total", 12)]
         [TestCase("total_pages", 2)]
         // [Ignore("Skipping this test temporarily")]
-        // [Parallelizable(ParallelScope.Self)]
+        // [Parallelizable(ParallelScope.Self)] // this slowed down the test suit 
         public async Task GetUsers_ResultsFieldValidation(
             string fieldName,
             int expectedValue)
