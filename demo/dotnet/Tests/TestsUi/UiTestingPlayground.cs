@@ -18,7 +18,6 @@ namespace Tests.TestsUi
 
             driver = new FirefoxDriver(options);
             driver.Url = MainPage.pageLink;
-            // System.Threading.Thread.Sleep(2000);
         }
 
 
@@ -29,20 +28,33 @@ namespace Tests.TestsUi
             driver.Close();
         }
 
-        [Test]
-        public async Task DynamicPage()
-        {
-            string testPage = DynamicIdPage.pageLink;
-            IWebElement elemPageHref = driver.FindElement(By.CssSelector(MainPage.pageRefDynamicId));
+        public async Task NavigateFromMainPage_Via_ClickingLink_ValidateOpenedPageUrl(
+            string pageHrefLinkLocator,
+            string pageUrl)
+        { 
+            // driver.Navigate().GoToUrl(pageUrl);
+
+            // Click the hyper link
+            IWebElement elemPageHref = driver.FindElement(By.CssSelector(pageHrefLinkLocator));
             elemPageHref.Click();
 
-            string currentUrl = driver.Url;
-            // driver.Navigate().GoToUrl(testPage);
+            // Validate
+            Assert.That(driver.Url, Is.EqualTo(pageUrl), $"{pageUrl} did not load. Instead it is {driver.Url}");
+        }
 
-            Assert.That(driver.Url, Is.EqualTo(testPage), $"{testPage} did not load. Instead it is {driver.Url}");
+        [Test]
+        public async Task NavigateTo_DynamicPage_CheckBtnEnabled()
+        {
+            // Arrange
+            await NavigateFromMainPage_Via_ClickingLink_ValidateOpenedPageUrl(
+                MainPage.pageRefDynamicId,
+                DynamicIdPage.pageLink);
+
+            // Act (find the element)
             IWebElement elem = driver.FindElement(By.CssSelector(DynamicIdPage.btnAttr));
-            Assert.True(elem.Enabled, "Button was not enabled");
 
+            // Assert
+            Assert.True(elem.Enabled, "Button was not enabled");
         }
     }
 }
