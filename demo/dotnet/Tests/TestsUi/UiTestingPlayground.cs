@@ -1,22 +1,27 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using Tests.Data;
+using Tests.Fixtures;
 
 namespace Tests.TestsUi
 {
-    [TestFixture]
+    [TestFixture("firefox")]
+    [TestFixture("chrome")]
     public class UiTestingPlayground
     {
         private IWebDriver driver;
+        private readonly string _browser;
+
+        public UiTestingPlayground(string browser)
+        {
+            _browser = browser;
+        }
 
         [OneTimeSetUp]
         public async Task SetupAsync()
         {
-
-            FirefoxOptions options = new FirefoxOptions();
-            options.AddArgument("--headless");
-
-            driver = new FirefoxDriver(options);
+            driver = FixtureWebDriverFactory.CreateDriver(_browser);
             driver.Url = MainPage.pageLink;
         }
 
@@ -42,7 +47,14 @@ namespace Tests.TestsUi
             Assert.That(driver.Url, Is.EqualTo(pageUrl), $"{pageUrl} did not load. Instead it is {driver.Url}");
         }
 
-        [Test]
+        [SetUp]
+        public void Setup()
+        {
+            string testName = $"{TestContext.CurrentContext.Test.Name} [{_browser}]";
+            TestContext.WriteLine($"Executing: {testName}");
+        }
+
+            [Test]
         public async Task NavigateTo_DynamicPage_CheckBtnEnabled()
         {
             // Arrange

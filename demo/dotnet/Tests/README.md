@@ -20,10 +20,10 @@ qa-playground\demo\dotnet\Tests> cp appsettings.test_local.json appsettings.test
 - To run tests all or from the specific folder
 ```
 cd .\qa-playground\demo\dotnet\Tests
-dotnet clean; dotnet test --logger "console;verbosity=detailed"
-dotnet clean; dotnet test --logger "console;verbosity=detailed" --filter FullyQualifiedName~Tests.TestsApi
+dotnet clean; dotnet test --settings test.runsettings --logger "console;verbosity=detailed"
+dotnet clean; dotnet test --settings test.runsettings --logger "console;verbosity=detailed" --filter FullyQualifiedName~Tests.TestsApi
 ```
 - To run tests with html results
 ```
-dotnet clean; dotnet test --logger "html;logfilename=testResults.html"
+dotnet clean; dotnet test --settings test.runsettings --logger "html;logfilename=testResults.html"
 ```
