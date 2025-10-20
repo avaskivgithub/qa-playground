@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using System;
 using System.Globalization;
 using System.Reflection;
@@ -8,20 +9,27 @@ using System.Reflection;
 public class FixtureWebDriverFactory
 {
 
-    public static IWebDriver CreateDriver(string browserName)
+    public static IWebDriver CreateDriver(
+        string browserName,
+        string optionsArgsStr="--headless")
     {
         IWebDriver driver;
         switch (browserName.ToLower())
         {
             case "chrome":
                 ChromeOptions optionsChrome = new ChromeOptions();
-                optionsChrome.AddArgument("--headless");
+                if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsChrome.AddArgument(optionsArgsStr);
                 driver = new ChromeDriver(optionsChrome);
                 break;
             case "firefox":
                 FirefoxOptions optionsFirefox = new FirefoxOptions();
-                optionsFirefox.AddArgument("--headless");
+                if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsFirefox.AddArgument(optionsArgsStr);
                 driver = new FirefoxDriver(optionsFirefox);
+                break;
+            case "edge":
+                EdgeOptions optionsEdge = new EdgeOptions();
+                if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsEdge.AddArgument(optionsArgsStr);
+                driver = new EdgeDriver(optionsEdge);
                 break;
             default:
                 throw new ArgumentException($"Unsupported browser: {browserName}");
