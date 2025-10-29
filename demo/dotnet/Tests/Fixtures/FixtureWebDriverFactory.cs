@@ -2,19 +2,23 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Globalization;
 using System.Reflection;
+using Tests.Data;
 
 public class FixtureWebDriverFactory
 {
+    private const int TIMEOUTSecs = 30;
+    private const int CommandTIMEOUTSecs = 120;
 
     public static IWebDriver CreateDriver(
         string browserName,
-        string optionsArgsStr="--headless")
+        string optionsArgsStr = "--headless")
     {
         IWebDriver driver;
-        TimeSpan commandTimeout = TimeSpan.FromSeconds(120);
+        TimeSpan commandTimeout = TimeSpan.FromSeconds(CommandTIMEOUTSecs);
 
         switch (browserName.ToLower())
         {
@@ -44,6 +48,23 @@ public class FixtureWebDriverFactory
         }
 
         return driver;
+    }
+    
+    // Have to do this to avoid https://stackoverflow.com/questions/66563600/nunit-run-parametrized-tests-in-parallel-with-selenium
+    public static (IWebDriver driverInit, WebDriverWait waitInit) SetupDriverAndWaitForParallelRun(string browserInit)
+    {
+        IWebDriver driverInit = CreateDriver(browserInit, "--headless");
+        driverInit.Url = MainPage.pageLink;
+        WebDriverWait waitInit = new WebDriverWait(driverInit, TimeSpan.FromSeconds(TIMEOUTSecs));
+
+        return (driverInit, waitInit);
+    }
+
+    public static void TeardownDriverForParallelRun(IWebDriver driverInit)
+    {
+        driverInit.Quit(); // fully terminates the WebDriver session and all background process
+                        // opposed to close() that keeps the WebDriver session active
+        driverInit.Dispose();
     }
 
     // Magic of Reflection - TOBD: it doesn't work null is returned by Type.GetType (maybe assembly name is needed)

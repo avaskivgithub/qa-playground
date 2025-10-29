@@ -18,7 +18,6 @@ namespace Tests.TestsUi
     [TestFixture("edge")]
     public class UiTestingPlayground
     {
-        private const int TIMEOUTSecs = 30;
         private readonly string _browser;
 
         public UiTestingPlayground(string browser)
@@ -31,50 +30,6 @@ namespace Tests.TestsUi
         {
             string testName = $"{TestContext.CurrentContext.Test.Name} [{_browser}]";
             TestContext.WriteLine($"Executing: {testName}");
-        }
-
-        /*
-        // TOBD: tests fail with [Parallelizable(ParallelScope.All)] - why sessions(browser windows) are not closed 
-           see https://stackoverflow.com/questions/66563600/nunit-run-parametrized-tests-in-parallel-with-selenium 
-
-        private IWebDriver driver;
-        private WebDriverWait wait;
-        
-        [SetUp]
-        public void Setup()
-        {
-            driver = FixtureWebDriverFactory.CreateDriver(_browser, ""); // "--headless"); //
-            driver.Url = MainPage.pageLink;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(TIMEOUTSecs));
-
-            string testName = $"{TestContext.CurrentContext.Test.Name} [{_browser}]";
-            TestContext.WriteLine($"Executing: {testName}");
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            driver.Quit(); // fully terminates the WebDriver session and all background process
-                            // opposed to close() that keeps the WebDriver session active
-            driver.Dispose();
-        }
-        */
-        
-        // Have to do this to avoid https://stackoverflow.com/questions/66563600/nunit-run-parametrized-tests-in-parallel-with-selenium
-        public (IWebDriver driverInit, WebDriverWait waitInit) SetupDriverAndWaitForParallelRun(string browserInit)
-        {
-            IWebDriver driverInit = FixtureWebDriverFactory.CreateDriver(browserInit, "--headless");
-            driverInit.Url = MainPage.pageLink;
-            WebDriverWait waitInit = new WebDriverWait(driverInit, TimeSpan.FromSeconds(TIMEOUTSecs));
-
-            return (driverInit, waitInit);
-        }
-
-        public void TeardownDriverForParallelRun(IWebDriver driverInit)
-        {
-            driverInit.Quit(); // fully terminates the WebDriver session and all background process
-                            // opposed to close() that keeps the WebDriver session active
-            driverInit.Dispose();
         }
 
         public async Task NavigateFromMainPage_Via_ClickingLink_ValidateOpenedPageUrl(
@@ -99,7 +54,7 @@ namespace Tests.TestsUi
         {
             IWebDriver driverTest;
             WebDriverWait waitTest;
-            (driverTest, waitTest) = SetupDriverAndWaitForParallelRun(_browser);
+            (driverTest, waitTest) = FixtureWebDriverFactory.SetupDriverAndWaitForParallelRun(_browser);
             try
             {
                 // Arrange
@@ -117,7 +72,7 @@ namespace Tests.TestsUi
             }
             finally
             {
-                TeardownDriverForParallelRun(driverTest);
+                FixtureWebDriverFactory.TeardownDriverForParallelRun(driverTest);
             }
         }
 
@@ -126,7 +81,7 @@ namespace Tests.TestsUi
         {
             IWebDriver driverTest;
             WebDriverWait waitTest;
-            (driverTest, waitTest) = SetupDriverAndWaitForParallelRun(_browser);
+            (driverTest, waitTest) = FixtureWebDriverFactory.SetupDriverAndWaitForParallelRun(_browser);
             try
             {
                 // Arrange
@@ -153,7 +108,7 @@ namespace Tests.TestsUi
             }
             finally
             {
-                TeardownDriverForParallelRun(driverTest);
+                FixtureWebDriverFactory.TeardownDriverForParallelRun(driverTest);
             }
         }
     }
