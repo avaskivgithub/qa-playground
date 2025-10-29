@@ -14,22 +14,30 @@ public class FixtureWebDriverFactory
         string optionsArgsStr="--headless")
     {
         IWebDriver driver;
+        TimeSpan commandTimeout = TimeSpan.FromSeconds(120);
+
         switch (browserName.ToLower())
         {
             case "chrome":
                 ChromeOptions optionsChrome = new ChromeOptions();
+                ChromeDriverService serviceChrome = ChromeDriverService.CreateDefaultService();
+
                 if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsChrome.AddArgument(optionsArgsStr);
-                driver = new ChromeDriver(optionsChrome);
+                driver = new ChromeDriver(serviceChrome, optionsChrome, commandTimeout);
                 break;
             case "firefox":
                 FirefoxOptions optionsFirefox = new FirefoxOptions();
+                FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
+
                 if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsFirefox.AddArgument(optionsArgsStr);
-                driver = new FirefoxDriver(optionsFirefox);
+                driver = new FirefoxDriver(serviceFirefox, optionsFirefox, commandTimeout);
                 break;
             case "edge":
                 EdgeOptions optionsEdge = new EdgeOptions();
+                EdgeDriverService serviceEdge = EdgeDriverService.CreateDefaultService();
+
                 if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsEdge.AddArgument(optionsArgsStr);
-                driver = new EdgeDriver(optionsEdge);
+                driver = new EdgeDriver(serviceEdge, optionsEdge, commandTimeout);
                 break;
             default:
                 throw new ArgumentException($"Unsupported browser: {browserName}");
