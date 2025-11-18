@@ -14,7 +14,7 @@ namespace Tests.TestsUi
 {
     [Parallelizable(ParallelScope.All)]
     [TestFixture("firefox")]
-    [TestFixture("chrome")]
+    [TestFixture("chrome")] // TOBD: https://stackoverflow.com/questions/58606020/selenium-webdriver-chromedriver-slow-to-launch-why
     [TestFixture("edge")]
     public class UiTestingPlayground
     {
@@ -77,6 +77,7 @@ namespace Tests.TestsUi
         }
 
         [Test]
+        //[Ignore("Skipping this test temporarily")]
         public async Task NavigateTo_ClientSideDelayPage_CheckTextIsShown()
         {
             IWebDriver driverTest;

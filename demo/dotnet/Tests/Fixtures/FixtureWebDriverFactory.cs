@@ -1,3 +1,5 @@
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
@@ -11,7 +13,7 @@ using Tests.Data;
 public class FixtureWebDriverFactory
 {
     private const int TIMEOUTSecs = 30;
-    private const int CommandTIMEOUTSecs = 120;
+    private const int CommandTIMEOUTSecs = 45;
 
     public static IWebDriver CreateDriver(
         string browserName,
@@ -19,14 +21,18 @@ public class FixtureWebDriverFactory
     {
         IWebDriver driver;
         TimeSpan commandTimeout = TimeSpan.FromSeconds(CommandTIMEOUTSecs);
+        bool EnableVerboseLogging = true;
 
         switch (browserName.ToLower())
         {
             case "chrome":
                 ChromeOptions optionsChrome = new ChromeOptions();
                 ChromeDriverService serviceChrome = ChromeDriverService.CreateDefaultService();
+                serviceChrome.EnableVerboseLogging = EnableVerboseLogging;
 
                 if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsChrome.AddArgument(optionsArgsStr);
+
+                new DriverManager().SetUpDriver(new ChromeConfig());
                 driver = new ChromeDriver(serviceChrome, optionsChrome, commandTimeout);
                 break;
             case "firefox":
@@ -34,13 +40,18 @@ public class FixtureWebDriverFactory
                 FirefoxDriverService serviceFirefox = FirefoxDriverService.CreateDefaultService();
 
                 if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsFirefox.AddArgument(optionsArgsStr);
+
+                new DriverManager().SetUpDriver(new FirefoxConfig());
                 driver = new FirefoxDriver(serviceFirefox, optionsFirefox, commandTimeout);
                 break;
             case "edge":
                 EdgeOptions optionsEdge = new EdgeOptions();
                 EdgeDriverService serviceEdge = EdgeDriverService.CreateDefaultService();
+                serviceEdge.EnableVerboseLogging = EnableVerboseLogging;
 
                 if (!string.IsNullOrWhiteSpace(optionsArgsStr)) optionsEdge.AddArgument(optionsArgsStr);
+
+                new DriverManager().SetUpDriver(new EdgeConfig());
                 driver = new EdgeDriver(serviceEdge, optionsEdge, commandTimeout);
                 break;
             default:
