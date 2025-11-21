@@ -16,7 +16,8 @@ Library           RequestLibrary.py
 Simple Get Request
     Given api is up
     When user calls "/api/users"
-    Then result is "200"
+    Then result status code is "200"
+        and body contains "\"total\":12"
 
 *** Keywords ***
 Api is up
@@ -25,5 +26,8 @@ Api is up
 User calls "${expression}"
     Call get    ${expression}
 
-Result is "${result}"
-    Result code should be    ${result}
+Result status code is "${result}"
+    Result code should be  ${result}
+
+Body contains "${result}"
+    Result body should contain  ${result}
