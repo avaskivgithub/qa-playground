@@ -47,13 +47,11 @@ pip install -r requirements.txt
 
 ### Excel Creation (With Yahoo Finance Data)
 Run python script [excel_portfolio_data_from_yfinance.py](excel_portfolio_data_from_yfinance.py).
-For now if you want to change list of stocks and date range 
+For now if you want to change list of stocks and date range set them in the [setup_portfolio.py](setup_portfolio.py)
 ```
-if __name__ == "__main__":
-    
-    portfolio_list = ["NVDA", "VTI"]
-    interval="1d"
-    (start, end) = ("2025-01-01", "2025-12-01")
+portfolio_list = ["NVDA", "VTI"]
+interval="1d"
+(start, end) = ("2025-01-01", "2025-10-31")
 ```
 change those values in the script you are about to run
 ```
