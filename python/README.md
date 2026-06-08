@@ -1,5 +1,6 @@
 # simple_app_with_tests
-"Test App" written in Python and with system tests [see the definition here](http://softwaretestingfundamentals.com/system-testing/#:~:text=SYSTEM%20TESTING%20is%20a%20level,compliance%20with%20the%20specified%20requirements.)
+"Test App" written in Python and with system tests (which are end-to-end tests). 
+This application is a basic test case management tool.
 
 ## Prerequisites 
 You'll need:
